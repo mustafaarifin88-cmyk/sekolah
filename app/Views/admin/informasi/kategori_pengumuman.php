@@ -12,25 +12,32 @@
 <div class="row g-4">
     <div class="col-lg-4">
         <div class="modern-card bg-white p-4 h-100">
-            <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
-                <div class="bg-danger bg-opacity-10 text-danger rounded-3 p-3 me-3"><i class="fas fa-bookmark fs-4"></i></div>
-                <h5 class="fw-bold m-0 text-dark">Kategori Pengumuman</h5>
+            <div class="d-flex align-items-center mb-4">
+                <div class="bg-danger bg-opacity-10 text-danger rounded-circle d-flex justify-content-center align-items-center me-3" style="width: 45px; height: 45px;">
+                    <i class="fas fa-plus fs-5"></i>
+                </div>
+                <h5 class="fw-bold m-0 text-dark">Tambah Kategori</h5>
             </div>
             <form action="<?= base_url('admin/informasi/simpan_kategori_pengumuman') ?>" method="post">
                 <div class="mb-4">
-                    <label class="fw-bold text-secondary mb-2 fs-7 text-uppercase tracking-wider">Nama Kategori</label>
+                    <label class="form-label fw-bold text-secondary text-uppercase fs-7 tracking-wider">Nama Kategori Pengumuman</label>
                     <input type="text" class="form-control modern-input" name="nama_kategori" placeholder="Contoh: Info Akademik" required>
                 </div>
-                <button type="submit" class="btn w-100 rounded-pill py-3 fw-bold shadow-sm border-0 hover-lift text-white" style="background: linear-gradient(45deg, #ff0844, #ffb199);">SIMPAN KATEGORI</button>
+                <button type="submit" class="btn text-white w-100 rounded-pill py-2 fw-bold shadow-sm hover-lift border-0" style="background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);">
+                    <i class="fas fa-save me-2"></i> Simpan Kategori
+                </button>
             </form>
         </div>
     </div>
-    
+
     <div class="col-lg-8">
-        <div class="modern-card bg-white p-4 h-100">
-            <h5 class="fw-bold text-dark mb-4 pb-3 border-bottom">Daftar Kategori Pengumuman</h5>
+        <div class="modern-card bg-white p-0 h-100 overflow-hidden">
+            <div class="p-4 border-bottom border-light d-flex justify-content-between align-items-center bg-light">
+                <h5 class="fw-bold m-0 text-dark"><i class="fas fa-list me-2 text-danger"></i> Daftar Kategori Pengumuman</h5>
+                <span class="badge bg-danger rounded-pill fs-7 px-3 py-2"><?= isset($kategori) ? count($kategori) : 0 ?> Kategori</span>
+            </div>
             <div class="table-responsive">
-                <table class="table table-hover table-modern datatable w-100">
+                <table class="table table-hover table-modern mb-0">
                     <thead>
                         <tr>
                             <th width="5%" class="text-center rounded-start">No</th>
@@ -44,8 +51,8 @@
                             <td class="text-center"><?= $key + 1 ?></td>
                             <td class="fw-bold text-dark"><?= $row['nama_kategori'] ?></td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-light text-primary rounded-circle shadow-sm me-1" style="width:35px; height:35px;"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-sm btn-light text-danger rounded-circle shadow-sm" style="width:35px; height:35px;"><i class="fas fa-trash"></i></button>
+                                <button class="btn btn-sm btn-light text-primary rounded-circle shadow-sm me-1" data-toggle="modal" data-target="#modalEdit<?= $row['id_kategori_p'] ?>" style="width:35px; height:35px;"><i class="fas fa-edit"></i></button>
+                                <a href="<?= base_url('admin/informasi/hapus_kategori_pengumuman/' . $row['id_kategori_p']) ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?')" class="btn btn-sm btn-light text-danger rounded-circle shadow-sm d-inline-flex align-items-center justify-content-center" style="width:35px; height:35px;"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                         <?php endforeach; else: ?>
@@ -57,4 +64,33 @@
         </div>
     </div>
 </div>
+
+<?php if(isset($kategori) && count($kategori) > 0): foreach($kategori as $row): ?>
+<div class="modal fade" id="modalEdit<?= $row['id_kategori_p'] ?>" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header modal-header-custom p-4" style="background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);">
+                <h5 class="modal-title fw-bold text-white"><i class="fas fa-edit me-2"></i> Edit Kategori Pengumuman</h5>
+                <button type="button" class="close text-white shadow-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <form action="<?= base_url('admin/informasi/update_kategori_pengumuman/' . $row['id_kategori_p']) ?>" method="post">
+                <div class="modal-body p-4 bg-white">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-secondary text-uppercase fs-7 tracking-wider">Nama Kategori</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-0 text-danger px-3 rounded-start-3"><i class="fas fa-bullhorn"></i></span>
+                            <input type="text" class="form-control modern-input rounded-start-0" name="nama_kategori" value="<?= $row['nama_kategori'] ?>" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 p-4 pt-0 bg-white">
+                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-secondary shadow-sm hover-lift" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn text-white rounded-pill px-5 fw-bold shadow-sm hover-lift border-0" style="background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);"><i class="fas fa-save me-2"></i> Simpan Perubahan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<?php endforeach; endif; ?>
+
 <?= $this->endSection() ?>
