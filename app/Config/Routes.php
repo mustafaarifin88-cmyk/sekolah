@@ -38,6 +38,7 @@ $routes->group('admin', ['filter' => 'admin'], static function ($routes) {
         $routes->get('berita', 'Admin\Informasi::berita');
         $routes->get('kategori_pengumuman', 'Admin\Informasi::kategori_pengumuman');
         $routes->get('pengumuman', 'Admin\Informasi::pengumuman');
+        $routes->post('simpan_pengumuman', 'Admin\Informasi::simpan_pengumuman');
     });
 
     $routes->group('akademik', static function ($routes) {
