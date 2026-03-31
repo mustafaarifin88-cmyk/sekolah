@@ -22,6 +22,48 @@ class Aplikasi extends BaseController
 
     public function update_identitas()
     {
+        $model = new IdentitasSekolahModel();
+        
+        // Cek apakah data identitas sudah ada di database (karena ini pengaturan single row)
+        $identitas = $model->first();
+        $id = $identitas ? $identitas['id'] : null;
+
+        // Tangkap data teks dari input form
+        $data = [
+            'nama_sekolah'   => $this->request->getPost('nama_sekolah'),
+            'alamat_sekolah' => $this->request->getPost('alamat_sekolah'),
+            'nama_dinas'     => $this->request->getPost('nama_dinas'),
+            'nama_kepsek'    => $this->request->getPost('nama_kepsek'),
+            'nip_kepsek'     => $this->request->getPost('nip_kepsek'),
+            'sk_kepsek'      => $this->request->getPost('sk_kepsek'),
+        ];
+
+        // Daftar input file yang perlu diproses
+        $fileKeys = ['logo_sekolah', 'logo_pemda', 'foto_kepsek', 'ttd_kepsek'];
+        
+        foreach ($fileKeys as $key) {
+            $file = $this->request->getFile($key);
+            
+            // Jika ada file yang diunggah dan valid
+            if ($file && $file->isValid() && !$file->hasMoved()) {
+                // Generate nama acak agar tidak bentrok
+                $newName = $file->getRandomName();
+                // Pindahkan file ke folder public/uploads/identitas/
+                $file->move('uploads/identitas/', $newName);
+                // Tambahkan nama file baru ke array data untuk disimpan ke DB
+                $data[$key] = $newName;
+            }
+        }
+
+        // Lakukan Insert jika data kosong, atau Update jika data sudah ada
+        if ($id) {
+            $model->update($id, $data);
+        } else {
+            $model->insert($data);
+        }
+
+        // Kembalikan ke halaman form dengan pesan sukses
+        return redirect()->to(base_url('admin/aplikasi/identitas'))->with('success', 'Data Identitas berhasil diperbarui!');
     }
 
     public function kepsek()
