@@ -13,356 +13,341 @@ $namaSidebar = ($identitas && !empty($identitas['nama_sekolah'])) ? $identitas['
 ?>
 
 <style>
-    .sidebar-modern {
-        background: linear-gradient(180deg, #161625 0%, #202035 100%) !important;
-        border-right: 1px solid rgba(255,255,255,0.05) !important;
-        box-shadow: 4px 0 20px rgba(0,0,0,0.3) !important;
+    .sidebar-futuristic {
+        background: linear-gradient(180deg, #0f172a 0%, #1e1b4b 100%) !important;
+        box-shadow: 4px 0 20px rgba(0,0,0,0.2) !important;
+        border-right: 1px solid rgba(255,255,255,0.05);
     }
-    .brand-link {
-        border-bottom: 1px solid rgba(255,255,255,0.05) !important;
-        background: rgba(0,0,0,0.2) !important;
+    .brand-glass {
+        background: rgba(255, 255, 255, 0.05) !important;
         backdrop-filter: blur(10px);
-        display: flex !important;
-        align-items: center;
-        justify-content: flex-start;
-        padding: 0.8125rem 1rem !important;
+        border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+        padding: 1.2rem 1rem !important;
+        transition: all 0.3s ease;
     }
-    .brand-link .brand-image {
-        width: 35px;
-        height: 35px;
-        object-fit: contain;
-        margin-left: 0;
-        margin-right: 10px;
+    .brand-glass:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
     }
-    .brand-text {
-        font-size: 0.95rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 170px;
+    .nav-futuristic .nav-item {
+        margin-bottom: 4px;
     }
-    .sidebar::-webkit-scrollbar {
-        width: 6px;
-    }
-    .sidebar::-webkit-scrollbar-track {
-        background: transparent;
-    }
-    .sidebar::-webkit-scrollbar-thumb {
-        background: rgba(255,255,255,0.1);
-        border-radius: 10px;
-    }
-    .sidebar::-webkit-scrollbar-thumb:hover {
-        background: rgba(255,255,255,0.3);
-    }
-    .nav-modern {
+    .nav-futuristic .nav-link {
         border-radius: 12px;
-        margin: 4px 12px;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        color: rgba(255,255,255,0.7) !important;
+        margin: 0 12px;
+        padding: 10px 15px;
+        color: #94a3b8 !important;
+        font-weight: 500;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         overflow: hidden;
     }
-    .nav-modern:hover {
-        background: rgba(255,255,255,0.05) !important;
+    .nav-futuristic .nav-link i.nav-icon {
+        color: #64748b;
+        transition: all 0.3s ease;
+    }
+    .nav-futuristic .nav-link:hover {
+        background: rgba(255,255,255,0.05);
+        color: #f8fafc !important;
+        transform: translateX(5px);
+    }
+    .nav-futuristic .nav-link:hover i.nav-icon {
+        color: #818cf8;
+        transform: scale(1.1);
+    }
+    .nav-futuristic .nav-link.active {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
         color: #ffffff !important;
-        transform: translateX(6px);
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
     }
-    .nav-modern:hover .nav-icon {
-        transform: scale(1.1) rotate(5deg);
-        color: #38ef7d;
-    }
-    .nav-pills .nav-link.active, .nav-modern.active {
-        background: linear-gradient(90deg, rgba(78,84,200,0.3) 0%, transparent 100%) !important;
+    .nav-futuristic .nav-link.active i.nav-icon {
         color: #ffffff !important;
-        border-left: 4px solid #38ef7d;
-        box-shadow: inset 5px 0 15px rgba(56, 239, 125, 0.1);
-        font-weight: 600;
-        transform: translateX(4px);
     }
-    .nav-pills .nav-link.active .nav-icon {
-        color: #38ef7d !important;
-        text-shadow: 0 0 10px rgba(56, 239, 125, 0.5);
-    }
-    .nav-header {
+    .nav-header-custom {
+        color: #475569 !important;
+        font-size: 0.75rem !important;
+        font-weight: 800 !important;
         letter-spacing: 1.5px;
-        font-size: 0.65rem !important;
-        color: rgba(255,255,255,0.4) !important;
-        padding-top: 1.5rem !important;
-        padding-bottom: 0.5rem !important;
+        padding: 1.5rem 1.5rem 0.5rem 1.5rem !important;
+        text-transform: uppercase;
     }
-    .nav-treeview {
-        position: relative;
-    }
-    .nav-treeview::before {
-        content: '';
-        position: absolute;
-        left: 28px;
-        top: 0;
-        bottom: 0;
-        width: 1px;
-        background: rgba(255,255,255,0.1);
+    .user-panel-glass {
+        background: rgba(255,255,255,0.03);
+        border-radius: 16px;
+        margin: 15px;
+        padding: 15px !important;
+        border: 1px solid rgba(255,255,255,0.05);
+        backdrop-filter: blur(10px);
     }
     .nav-treeview .nav-link {
-        padding-left: 3.5rem !important;
+        padding-left: 45px !important;
+        font-size: 0.9rem;
     }
     .nav-treeview .nav-link::before {
         content: '';
         position: absolute;
-        left: 28px;
+        left: 24px;
         top: 50%;
-        width: 10px;
-        height: 1px;
-        background: rgba(255,255,255,0.1);
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #475569;
+        transform: translateY(-50%);
+        transition: all 0.3s;
     }
-    .nav-treeview .nav-link.active {
-        background: transparent !important;
-        border-left: none;
-        color: #38ef7d !important;
-        transform: translateX(0);
-        box-shadow: none;
+    .nav-treeview .nav-link:hover::before,
+    .nav-treeview .nav-link.active::before {
+        background: #ffffff;
+        box-shadow: 0 0 10px #ffffff;
     }
-    .nav-treeview .nav-link.active i {
-        color: #38ef7d !important;
+    .nav-treeview .nav-link i.nav-icon {
+        display: none;
+    }
+    ::-webkit-scrollbar-sidebar {
+        width: 5px;
     }
 </style>
 
-<aside class="main-sidebar sidebar-modern shadow-lg elevation-4">
-    <a href="<?= base_url('/') ?>" class="brand-link" target="_blank">
-        <img src="<?= $logoSidebar ?>" alt="Logo" class="brand-image img-circle shadow-lg bg-white p-1">
-        <span class="brand-text font-weight-bold text-white tracking-wide"><?= strtoupper($namaSidebar) ?></span>
+<aside class="main-sidebar sidebar-futuristic elevation-4">
+    <a href="<?= base_url($role . '/dashboard') ?>" class="brand-link brand-glass d-flex align-items-center">
+        <img src="<?= $logoSidebar ?>" alt="Logo" class="brand-image img-circle elevation-2 bg-white" style="opacity: .9; padding: 2px;">
+        <span class="brand-text fw-bold text-white tracking-wider ms-2 text-truncate" style="font-size: 1.1rem;"><?= strtoupper($namaSidebar) ?></span>
     </a>
 
     <div class="sidebar pb-4">
-        <nav class="mt-4">
-            <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center user-panel-glass">
+            <div class="image">
+                <img src="<?= base_url('uploads/profil/' . (session()->get('foto') ?? 'default.png')) ?>" class="img-circle elevation-2 bg-white" alt="User Image" style="width: 40px; height: 40px; object-fit: cover;">
+            </div>
+            <div class="info ms-2 w-100 text-truncate">
+                <a href="<?= base_url($role . '/profil') ?>" class="d-block text-white fw-bold fs-6 mb-0"><?= session()->get('username') ?></a>
+                <span class="badge bg-indigo rounded-pill text-xs fw-semibold px-2 mt-1" style="background: rgba(99, 102, 241, 0.2) !important; color: #a5b4fc !important; border: 1px solid rgba(99, 102, 241, 0.3);"><?= strtoupper($role) ?></span>
+            </div>
+        </div>
+
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column nav-futuristic" data-widget="treeview" role="menu" data-accordion="false">
                 
                 <li class="nav-item">
-                    <a href="<?= base_url($role . '/dashboard') ?>" class="nav-link nav-modern <?= ($seg2 == 'dashboard' || $seg2 == '') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-laptop-house transition-all"></i>
-                        <p>Dashboard</p>
+                    <a href="<?= base_url($role . '/dashboard') ?>" class="nav-link <?= ($seg2 == 'dashboard' || $seg2 == '') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-layer-group"></i>
+                        <p>Dashboard Overview</p>
                     </a>
                 </li>
 
                 <?php if($role === 'admin'): ?>
-                
-                <li class="nav-header text-uppercase">PENGATURAN & INFO</li>
+                <li class="nav-header nav-header-custom">Main Menu Admin</li>
                 
                 <li class="nav-item <?= ($seg2 == 'aplikasi') ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link nav-modern <?= ($seg2 == 'aplikasi') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-cogs transition-all"></i>
-                        <p>Aplikasi <i class="right fas fa-angle-left"></i></p>
+                    <a href="#" class="nav-link <?= ($seg2 == 'aplikasi') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-laptop-code"></i>
+                        <p>Pengaturan Aplikasi <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/identitas') ?>" class="nav-link nav-modern <?= ($seg3 == 'identitas') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Identitas & Kepsek</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/menu') ?>" class="nav-link nav-modern <?= ($seg3 == 'menu') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Menu Frontend</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/slider') ?>" class="nav-link nav-modern <?= ($seg3 == 'slider') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Slider Beranda</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/tema') ?>" class="nav-link nav-modern <?= ($seg3 == 'tema') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Tema Header</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/visimisi') ?>" class="nav-link nav-modern <?= ($seg3 == 'visimisi') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Visi & Misi</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/set_mapel') ?>" class="nav-link nav-modern <?= ($seg3 == 'set_mapel') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Set Mapel Guru</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/set_kelas') ?>" class="nav-link nav-modern <?= ($seg3 == 'set_kelas') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Set Wali Kelas</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/identitas') ?>" class="nav-link <?= ($seg3 == 'identitas') ? 'active' : '' ?>"><p>Identitas Sekolah</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/kepsek') ?>" class="nav-link <?= ($seg3 == 'kepsek') ? 'active' : '' ?>"><p>Data Kepala Sekolah</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/menu') ?>" class="nav-link <?= ($seg3 == 'menu') ? 'active' : '' ?>"><p>Menu Eksternal</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/tema') ?>" class="nav-link <?= ($seg3 == 'tema') ? 'active' : '' ?>"><p>Tema Website</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/visimisi') ?>" class="nav-link <?= ($seg3 == 'visimisi') ? 'active' : '' ?>"><p>Visi & Misi</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/set_mapel') ?>" class="nav-link <?= ($seg3 == 'set_mapel') ? 'active' : '' ?>"><p>Tugas Mapel Guru</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/set_kelas') ?>" class="nav-link <?= ($seg3 == 'set_kelas') ? 'active' : '' ?>"><p>Tugas Wali Kelas</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/slider') ?>" class="nav-link <?= ($seg3 == 'slider') ? 'active' : '' ?>"><p>Slide Show (Banner)</p></a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item <?= ($seg2 == 'informasi') ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link nav-modern <?= ($seg2 == 'informasi') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-bullhorn transition-all"></i>
+                    <a href="#" class="nav-link <?= ($seg2 == 'informasi') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-bullhorn"></i>
                         <p>Pusat Informasi <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('admin/informasi/kategori_berita') ?>" class="nav-link nav-modern <?= ($seg3 == 'kategori_berita') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Kategori Berita</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/informasi/berita') ?>" class="nav-link nav-modern <?= ($seg3 == 'berita') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Data Berita</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/informasi/kategori_pengumuman') ?>" class="nav-link nav-modern <?= ($seg3 == 'kategori_pengumuman') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Kat. Pengumuman</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/informasi/pengumuman') ?>" class="nav-link nav-modern <?= ($seg3 == 'pengumuman') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Data Pengumuman</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/informasi/kategori_berita') ?>" class="nav-link <?= ($seg3 == 'kategori_berita') ? 'active' : '' ?>"><p>Kategori Berita</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/informasi/berita') ?>" class="nav-link <?= ($seg3 == 'berita') ? 'active' : '' ?>"><p>Manajemen Berita</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/informasi/kategori_pengumuman') ?>" class="nav-link <?= ($seg3 == 'kategori_pengumuman') ? 'active' : '' ?>"><p>Kategori Pengumuman</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/informasi/pengumuman') ?>" class="nav-link <?= ($seg3 == 'pengumuman') ? 'active' : '' ?>"><p>Data Pengumuman</p></a></li>
                     </ul>
                 </li>
-                
-                <li class="nav-header text-uppercase">SISTEM MANAJEMEN</li>
-                
+
                 <li class="nav-item <?= ($seg2 == 'akademik') ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link nav-modern <?= ($seg2 == 'akademik') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-graduation-cap transition-all"></i>
-                        <p>Akademik <i class="right fas fa-angle-left"></i></p>
+                    <a href="#" class="nav-link <?= ($seg2 == 'akademik') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-graduation-cap"></i>
+                        <p>Akademik Utama <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('admin/akademik/kurikulum') ?>" class="nav-link nav-modern <?= ($seg3 == 'kurikulum') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Kurikulum</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/akademik/kelas') ?>" class="nav-link nav-modern <?= ($seg3 == 'kelas') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Data Kelas</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/akademik/siswa') ?>" class="nav-link nav-modern <?= ($seg3 == 'siswa') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Data Siswa</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/akademik/guru') ?>" class="nav-link nav-modern <?= ($seg3 == 'guru') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Data Guru</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/akademik/mapel') ?>" class="nav-link nav-modern <?= ($seg3 == 'mapel') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Mata Pelajaran</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/akademik/jadwal') ?>" class="nav-link nav-modern <?= ($seg3 == 'jadwal') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Jadwal Pelajaran</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/akademik/pantau_rapor') ?>" class="nav-link nav-modern <?= ($seg3 == 'pantau_rapor') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Pantau Input Rapor</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/akademik/cetak_rapor') ?>" class="nav-link nav-modern <?= ($seg3 == 'cetak_rapor') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Cetak Rapor</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/akademik/kurikulum') ?>" class="nav-link <?= ($seg3 == 'kurikulum') ? 'active' : '' ?>"><p>Data Kurikulum</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/akademik/kelas') ?>" class="nav-link <?= ($seg3 == 'kelas') ? 'active' : '' ?>"><p>Data Kelas</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/akademik/siswa') ?>" class="nav-link <?= ($seg3 == 'siswa') ? 'active' : '' ?>"><p>Data Siswa</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/akademik/guru') ?>" class="nav-link <?= ($seg3 == 'guru') ? 'active' : '' ?>"><p>Data Guru & Tendik</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/akademik/mapel') ?>" class="nav-link <?= ($seg3 == 'mapel') ? 'active' : '' ?>"><p>Mata Pelajaran</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/akademik/jadwal') ?>" class="nav-link <?= ($seg3 == 'jadwal') ? 'active' : '' ?>"><p>Jadwal Pelajaran</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/akademik/pantau_rapor') ?>" class="nav-link <?= ($seg3 == 'pantau_rapor') ? 'active' : '' ?>"><p>Pantau Nilai Rapor</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/akademik/cetak_rapor') ?>" class="nav-link <?= ($seg3 == 'cetak_rapor') ? 'active' : '' ?>"><p>Cetak Rapor Digital</p></a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item <?= ($seg2 == 'kesiswaan') ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link nav-modern <?= ($seg2 == 'kesiswaan') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-users transition-all"></i>
-                        <p>Kesiswaan <i class="right fas fa-angle-left"></i></p>
+                    <a href="#" class="nav-link <?= ($seg2 == 'kesiswaan') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Kesiswaan & BK <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('admin/kesiswaan/eskul') ?>" class="nav-link nav-modern <?= ($seg3 == 'eskul') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Ekstrakurikuler</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/kesiswaan/prestasi') ?>" class="nav-link nav-modern <?= ($seg3 == 'prestasi') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Prestasi Siswa</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/kesiswaan/disiplin') ?>" class="nav-link nav-modern <?= ($seg3 == 'disiplin') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Kedisiplinan</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/kesiswaan/organisasi') ?>" class="nav-link nav-modern <?= ($seg3 == 'organisasi') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Organisasi</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/kesiswaan/bk') ?>" class="nav-link nav-modern <?= ($seg3 == 'bk') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Bimbingan Konseling</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/kesiswaan/eskul') ?>" class="nav-link <?= ($seg3 == 'eskul') ? 'active' : '' ?>"><p>Ekstrakurikuler</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/kesiswaan/prestasi') ?>" class="nav-link <?= ($seg3 == 'prestasi') ? 'active' : '' ?>"><p>Prestasi Siswa</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/kesiswaan/disiplin') ?>" class="nav-link <?= ($seg3 == 'disiplin') ? 'active' : '' ?>"><p>Data Kedisiplinan</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/kesiswaan/organisasi') ?>" class="nav-link <?= ($seg3 == 'organisasi') ? 'active' : '' ?>"><p>Organisasi Siswa</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/kesiswaan/bk') ?>" class="nav-link <?= ($seg3 == 'bk') ? 'active' : '' ?>"><p>Bimbingan Konseling</p></a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item <?= ($seg2 == 'kepegawaian') ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link nav-modern <?= ($seg2 == 'kepegawaian') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-id-badge transition-all"></i>
+                    <a href="#" class="nav-link <?= ($seg2 == 'kepegawaian') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-id-badge"></i>
                         <p>Kepegawaian <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('admin/kepegawaian/riwayat_pendidikan') ?>" class="nav-link nav-modern <?= ($seg3 == 'riwayat_pendidikan') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Riwayat Pendidikan</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/kepegawaian/riwayat_pangkat') ?>" class="nav-link nav-modern <?= ($seg3 == 'riwayat_pangkat') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Riwayat Pangkat</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/kepegawaian/sertifikasi') ?>" class="nav-link nav-modern <?= ($seg3 == 'sertifikasi') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Sertifikasi</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/kepegawaian/beban_kerja') ?>" class="nav-link nav-modern <?= ($seg3 == 'beban_kerja') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Beban Kerja</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/kepegawaian/riwayat_pendidikan') ?>" class="nav-link <?= ($seg3 == 'riwayat_pendidikan') ? 'active' : '' ?>"><p>Riwayat Pendidikan</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/kepegawaian/riwayat_pangkat') ?>" class="nav-link <?= ($seg3 == 'riwayat_pangkat') ? 'active' : '' ?>"><p>Riwayat Kepangkatan</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/kepegawaian/sertifikasi') ?>" class="nav-link <?= ($seg3 == 'sertifikasi') ? 'active' : '' ?>"><p>Data Sertifikasi</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/kepegawaian/beban_kerja') ?>" class="nav-link <?= ($seg3 == 'beban_kerja') ? 'active' : '' ?>"><p>Beban Kerja Guru</p></a></li>
                     </ul>
                 </li>
 
-                <li class="nav-header text-uppercase">OPERASIONAL</li>
-
                 <li class="nav-item <?= ($seg2 == 'keuangan') ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link nav-modern <?= ($seg2 == 'keuangan') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-wallet transition-all"></i>
-                        <p>Keuangan <i class="right fas fa-angle-left"></i></p>
+                    <a href="#" class="nav-link <?= ($seg2 == 'keuangan') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-wallet"></i>
+                        <p>Kelola Keuangan <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('admin/keuangan/bos') ?>" class="nav-link nav-modern <?= ($seg3 == 'bos') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Dana BOS</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/keuangan/pengeluaran') ?>" class="nav-link nav-modern <?= ($seg3 == 'pengeluaran') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Pengeluaran</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/keuangan/laporan') ?>" class="nav-link nav-modern <?= ($seg3 == 'laporan') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Laporan Keuangan</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/keuangan/bos') ?>" class="nav-link <?= ($seg3 == 'bos') ? 'active' : '' ?>"><p>Dana BOS Masuk</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/keuangan/pengeluaran') ?>" class="nav-link <?= ($seg3 == 'pengeluaran') ? 'active' : '' ?>"><p>Data Pengeluaran</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/keuangan/laporan') ?>" class="nav-link <?= ($seg3 == 'laporan') ? 'active' : '' ?>"><p>Laporan Keuangan</p></a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item <?= ($seg2 == 'sarpras') ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link nav-modern <?= ($seg2 == 'sarpras') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-boxes transition-all"></i>
-                        <p>Sarana & Prasarana <i class="right fas fa-angle-left"></i></p>
+                    <a href="#" class="nav-link <?= ($seg2 == 'sarpras') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-building"></i>
+                        <p>Sarana Prasarana <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('admin/sarpras/ruang') ?>" class="nav-link nav-modern <?= ($seg3 == 'ruang') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Data Ruang</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/sarpras/kondisi') ?>" class="nav-link nav-modern <?= ($seg3 == 'kondisi') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Data Kondisi</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/sarpras/barang') ?>" class="nav-link nav-modern <?= ($seg3 == 'barang') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Inventaris Barang</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/sarpras/kerusakan') ?>" class="nav-link nav-modern <?= ($seg3 == 'kerusakan') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Lapor Kerusakan</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/sarpras/ruang') ?>" class="nav-link <?= ($seg3 == 'ruang') ? 'active' : '' ?>"><p>Master Ruang</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/sarpras/kondisi') ?>" class="nav-link <?= ($seg3 == 'kondisi') ? 'active' : '' ?>"><p>Master Kondisi</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/sarpras/barang') ?>" class="nav-link <?= ($seg3 == 'barang') ? 'active' : '' ?>"><p>Data Inventaris</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/sarpras/kerusakan') ?>" class="nav-link <?= ($seg3 == 'kerusakan') ? 'active' : '' ?>"><p>Status Kerusakan</p></a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item <?= ($seg2 == 'administrasi') ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link nav-modern <?= ($seg2 == 'administrasi') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-folder-open transition-all"></i>
-                        <p>Administrasi & Arsip <i class="right fas fa-angle-left"></i></p>
+                    <a href="#" class="nav-link <?= ($seg2 == 'administrasi') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-folder-open"></i>
+                        <p>Persuratan & Arsip <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('admin/administrasi/kode_surat') ?>" class="nav-link nav-modern <?= ($seg3 == 'kode_surat') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Kode Surat</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/administrasi/sifat_surat') ?>" class="nav-link nav-modern <?= ($seg3 == 'sifat_surat') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Sifat Surat</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/administrasi/surat_masuk') ?>" class="nav-link nav-modern <?= ($seg3 == 'surat_masuk') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Surat Masuk</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/administrasi/surat_keluar') ?>" class="nav-link nav-modern <?= ($seg3 == 'surat_keluar') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Surat Keluar</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/administrasi/kode_surat') ?>" class="nav-link <?= ($seg3 == 'kode_surat') ? 'active' : '' ?>"><p>Kode Surat</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/administrasi/sifat_surat') ?>" class="nav-link <?= ($seg3 == 'sifat_surat') ? 'active' : '' ?>"><p>Sifat Surat</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/administrasi/surat_masuk') ?>" class="nav-link <?= ($seg3 == 'surat_masuk') ? 'active' : '' ?>"><p>Surat Masuk</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/administrasi/surat_keluar') ?>" class="nav-link <?= ($seg3 == 'surat_keluar') ? 'active' : '' ?>"><p>Surat Keluar</p></a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item <?= ($seg2 == 'kelulusan') ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link nav-modern <?= ($seg2 == 'kelulusan') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-award transition-all"></i>
+                    <a href="#" class="nav-link <?= ($seg2 == 'kelulusan') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-user-graduate"></i>
                         <p>Info Kelulusan <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('admin/kelulusan/setting') ?>" class="nav-link nav-modern <?= ($seg3 == 'setting') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Pengaturan Waktu</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/kelulusan/data') ?>" class="nav-link nav-modern <?= ($seg3 == 'data') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Data Kelulusan</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/kelulusan/setting') ?>" class="nav-link <?= ($seg3 == 'setting') ? 'active' : '' ?>"><p>Pengaturan Sistem</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/kelulusan/data') ?>" class="nav-link <?= ($seg3 == 'data') ? 'active' : '' ?>"><p>Data Status Kelulusan</p></a></li>
                     </ul>
                 </li>
                 <?php endif; ?>
 
                 <?php if($role === 'guru'): ?>
-                <li class="nav-header text-uppercase">AKADEMIK & INFO</li>
+                <li class="nav-header nav-header-custom">PANEL GURU</li>
                 
                 <li class="nav-item <?= ($seg2 == 'informasi') ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link nav-modern <?= ($seg2 == 'informasi') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-bullhorn transition-all"></i>
+                    <a href="#" class="nav-link <?= ($seg2 == 'informasi') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-bullhorn"></i>
                         <p>Pusat Informasi <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('guru/informasi/berita') ?>" class="nav-link nav-modern <?= ($seg3 == 'berita') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Berita Saya</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('guru/informasi/pengumuman') ?>" class="nav-link nav-modern <?= ($seg3 == 'pengumuman') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Pengumuman Saya</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('guru/informasi/berita') ?>" class="nav-link <?= ($seg3 == 'berita') ? 'active' : '' ?>"><p>Manajemen Berita</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('guru/informasi/pengumuman') ?>" class="nav-link <?= ($seg3 == 'pengumuman') ? 'active' : '' ?>"><p>Pengumuman</p></a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item <?= ($seg2 == 'akademik') ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link nav-modern <?= ($seg2 == 'akademik') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-edit transition-all"></i>
-                        <p>Akademik <i class="right fas fa-angle-left"></i></p>
+                    <a href="#" class="nav-link <?= ($seg2 == 'akademik') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-chalkboard"></i>
+                        <p>Data Akademik <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('guru/akademik/siswa_ajar') ?>" class="nav-link nav-modern <?= ($seg3 == 'siswa_ajar') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Data Siswa Diajar</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('guru/akademik/input_nilai') ?>" class="nav-link nav-modern <?= ($seg3 == 'input_nilai') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Input Nilai Rapor</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('guru/akademik/siswa_ajar') ?>" class="nav-link <?= ($seg3 == 'siswa_ajar') ? 'active' : '' ?>"><p>Data Siswa Diajar</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('guru/akademik/input_nilai') ?>" class="nav-link <?= ($seg3 == 'input_nilai') ? 'active' : '' ?>"><p>Input Nilai Rapor</p></a></li>
                     </ul>
                 </li>
 
-                <li class="nav-header text-uppercase">PROFIL PEGAWAI</li>
                 <li class="nav-item <?= ($seg2 == 'kepegawaian') ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link nav-modern <?= ($seg2 == 'kepegawaian') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-id-badge transition-all"></i>
-                        <p>Kepegawaian <i class="right fas fa-angle-left"></i></p>
+                    <a href="#" class="nav-link <?= ($seg2 == 'kepegawaian') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-id-card"></i>
+                        <p>Kepegawaian (Pribadi) <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('guru/kepegawaian/riwayat') ?>" class="nav-link nav-modern <?= ($seg3 == 'riwayat') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Riwayat Pendidikan</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('guru/kepegawaian/sertifikasi') ?>" class="nav-link nav-modern <?= ($seg3 == 'sertifikasi') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Sertifikasi</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('guru/kepegawaian/beban_kerja') ?>" class="nav-link nav-modern <?= ($seg3 == 'beban_kerja') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Beban Kerja</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('guru/kepegawaian/riwayat') ?>" class="nav-link <?= ($seg3 == 'riwayat') ? 'active' : '' ?>"><p>Riwayat Pendidikan</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('guru/kepegawaian/sertifikasi') ?>" class="nav-link <?= ($seg3 == 'sertifikasi') ? 'active' : '' ?>"><p>Sertifikasi</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('guru/kepegawaian/beban_kerja') ?>" class="nav-link <?= ($seg3 == 'beban_kerja') ? 'active' : '' ?>"><p>Beban Kerja</p></a></li>
                     </ul>
                 </li>
                 <?php endif; ?>
 
                 <?php if($role === 'walikelas'): ?>
-                <li class="nav-header text-uppercase">PENGELOLAAN KELAS</li>
+                <li class="nav-header nav-header-custom">PANEL WALI KELAS</li>
                 
-                <li class="nav-item <?= ($seg2 == 'akademik') ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link nav-modern <?= ($seg2 == 'akademik') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-chalkboard transition-all"></i>
-                        <p>Akademik <i class="right fas fa-angle-left"></i></p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('walikelas/akademik/data_kelas') ?>" class="nav-link nav-modern <?= ($seg3 == 'data_kelas') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Data Kelas</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('walikelas/akademik/data_siswa') ?>" class="nav-link nav-modern <?= ($seg3 == 'data_siswa') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Data Siswa</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('walikelas/akademik/jadwal') ?>" class="nav-link nav-modern <?= ($seg3 == 'jadwal') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Jadwal Pelajaran</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('walikelas/akademik/input_nilai') ?>" class="nav-link nav-modern <?= ($seg3 == 'input_nilai') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Input Nilai</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('walikelas/akademik/pantau_nilai') ?>" class="nav-link nav-modern <?= ($seg3 == 'pantau_nilai') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Pantau Guru Mapel</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('walikelas/akademik/cetak_rapor') ?>" class="nav-link nav-modern <?= ($seg3 == 'cetak_rapor') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Cetak Rapor Digital</p></a></li>
-                    </ul>
-                </li>
-
                 <li class="nav-item <?= ($seg2 == 'informasi') ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link nav-modern <?= ($seg2 == 'informasi') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-bullhorn transition-all"></i>
+                    <a href="#" class="nav-link <?= ($seg2 == 'informasi') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-bullhorn"></i>
                         <p>Pusat Informasi <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('walikelas/informasi/berita') ?>" class="nav-link nav-modern <?= ($seg3 == 'berita') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Berita Saya</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('walikelas/informasi/pengumuman') ?>" class="nav-link nav-modern <?= ($seg3 == 'pengumuman') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Pengumuman Saya</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('walikelas/informasi/berita') ?>" class="nav-link <?= ($seg3 == 'berita') ? 'active' : '' ?>"><p>Berita Sekolah</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('walikelas/informasi/pengumuman') ?>" class="nav-link <?= ($seg3 == 'pengumuman') ? 'active' : '' ?>"><p>Pengumuman</p></a></li>
                     </ul>
                 </li>
 
-                <li class="nav-header text-uppercase">PROFIL PEGAWAI</li>
-                <li class="nav-item <?= ($seg2 == 'kepegawaian') ? 'menu-open' : '' ?>">
-                    <a href="#" class="nav-link nav-modern <?= ($seg2 == 'kepegawaian') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-id-badge transition-all"></i>
-                        <p>Kepegawaian <i class="right fas fa-angle-left"></i></p>
+                <li class="nav-item <?= ($seg2 == 'akademik') ? 'menu-open' : '' ?>">
+                    <a href="#" class="nav-link <?= ($seg2 == 'akademik') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-school"></i>
+                        <p>Kelola Kelas <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('walikelas/kepegawaian/riwayat') ?>" class="nav-link nav-modern <?= ($seg3 == 'riwayat') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Riwayat Pendidikan</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('walikelas/kepegawaian/sertifikasi') ?>" class="nav-link nav-modern <?= ($seg3 == 'sertifikasi') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Sertifikasi</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('walikelas/kepegawaian/beban_kerja') ?>" class="nav-link nav-modern <?= ($seg3 == 'beban_kerja') ? 'active' : '' ?>"><i class="far fa-circle nav-icon fs-7"></i><p>Beban Kerja</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('walikelas/akademik/data_kelas') ?>" class="nav-link <?= ($seg3 == 'data_kelas') ? 'active' : '' ?>"><p>Informasi Kelas</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('walikelas/akademik/data_siswa') ?>" class="nav-link <?= ($seg3 == 'data_siswa') ? 'active' : '' ?>"><p>Daftar Siswa Kelas</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('walikelas/akademik/jadwal') ?>" class="nav-link <?= ($seg3 == 'jadwal') ? 'active' : '' ?>"><p>Jadwal Pelajaran</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('walikelas/akademik/input_nilai') ?>" class="nav-link <?= ($seg3 == 'input_nilai') ? 'active' : '' ?>"><p>Input Nilai Mapel</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('walikelas/akademik/pantau_nilai') ?>" class="nav-link <?= ($seg3 == 'pantau_nilai') ? 'active' : '' ?>"><p>Pantau Nilai Guru Lain</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('walikelas/akademik/cetak_rapor') ?>" class="nav-link <?= ($seg3 == 'cetak_rapor') ? 'active' : '' ?>"><p>Cetak Rapor Kelas</p></a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item <?= ($seg2 == 'kepegawaian') ? 'menu-open' : '' ?>">
+                    <a href="#" class="nav-link <?= ($seg2 == 'kepegawaian') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-id-card-alt"></i>
+                        <p>Kepegawaian Pribadi <i class="right fas fa-angle-left"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item"><a href="<?= base_url('walikelas/kepegawaian/riwayat') ?>" class="nav-link <?= ($seg3 == 'riwayat') ? 'active' : '' ?>"><p>Riwayat Pendidikan</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('walikelas/kepegawaian/sertifikasi') ?>" class="nav-link <?= ($seg3 == 'sertifikasi') ? 'active' : '' ?>"><p>Sertifikasi</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('walikelas/kepegawaian/beban_kerja') ?>" class="nav-link <?= ($seg3 == 'beban_kerja') ? 'active' : '' ?>"><p>Beban Kerja</p></a></li>
                     </ul>
                 </li>
                 <?php endif; ?>
 
                 <?php if($role === 'siswa'): ?>
-                <li class="nav-header text-uppercase">LAYANAN SISWA</li>
+                <li class="nav-header nav-header-custom">LAYANAN SISWA</li>
                 
                 <li class="nav-item">
-                    <a href="<?= base_url('siswa/rapor/cetak_rapor') ?>" class="nav-link nav-modern <?= ($seg2 == 'rapor') ? 'active' : '' ?>">
-                        <i class="nav-icon fas fa-file-pdf transition-all text-danger"></i>
-                        <p>Cetak Rapor Digital</p>
+                    <a href="<?= base_url('siswa/rapor/cetak_rapor') ?>" class="nav-link <?= ($seg2 == 'rapor') ? 'active' : '' ?>">
+                        <i class="nav-icon fas fa-file-invoice"></i>
+                        <p>Rapor Digital Saya</p>
                     </a>
                 </li>
                 <?php endif; ?>
