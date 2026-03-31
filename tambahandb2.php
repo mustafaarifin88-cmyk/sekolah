@@ -1,0 +1,1 @@
+ALTER TABLE `set_mapel_guru` ADD `id_kelas` INT(11) NULL AFTER `id_guru`;
