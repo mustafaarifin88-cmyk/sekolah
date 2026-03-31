@@ -2,10 +2,6 @@
 
 use CodeIgniter\Router\RouteCollection;
 
-/**
- * @var RouteCollection $routes
- */
-
 $routes->get('/', 'Frontend::index');
 $routes->get('berita', 'Frontend::berita');
 $routes->get('berita/detail/(:num)', 'Frontend::detail_berita/$1');
@@ -25,21 +21,30 @@ $routes->group('admin', ['filter' => 'admin'], static function ($routes) {
         $routes->post('update_identitas', 'Admin\Aplikasi::update_identitas');
         $routes->get('kepsek', 'Admin\Aplikasi::kepsek');
         $routes->get('menu', 'Admin\Aplikasi::menu');
+        $routes->post('simpan_menu', 'Admin\Aplikasi::simpan_menu');
         $routes->get('tema', 'Admin\Aplikasi::tema');
+        $routes->post('update_tema', 'Admin\Aplikasi::update_tema');
         $routes->get('visimisi', 'Admin\Aplikasi::visimisi');
+        $routes->post('update_visimisi', 'Admin\Aplikasi::update_visimisi');
         $routes->get('set_mapel', 'Admin\Aplikasi::set_mapel');
+        $routes->post('simpan_set_mapel', 'Admin\Aplikasi::simpan_set_mapel');
         $routes->get('set_kelas', 'Admin\Aplikasi::set_kelas');
+        $routes->post('simpan_set_kelas', 'Admin\Aplikasi::simpan_set_kelas');
         $routes->get('profil', 'Admin\Aplikasi::profil');
+        $routes->post('update_profil', 'Admin\Aplikasi::update_profil');
         $routes->get('slider', 'Admin\Aplikasi::slider');
+        $routes->post('simpan_slider', 'Admin\Aplikasi::simpan_slider');
     });
 
     $routes->group('informasi', static function ($routes) {
         $routes->get('kategori_berita', 'Admin\Informasi::kategori_berita');
+        $routes->post('simpan_kategori_berita', 'Admin\Informasi::simpan_kategori_berita');
         $routes->get('berita', 'Admin\Informasi::berita');
+        $routes->post('simpan_berita', 'Admin\Informasi::simpan_berita');
         $routes->get('kategori_pengumuman', 'Admin\Informasi::kategori_pengumuman');
+        $routes->post('simpan_kategori_pengumuman', 'Admin\Informasi::simpan_kategori_pengumuman');
         $routes->get('pengumuman', 'Admin\Informasi::pengumuman');
         $routes->post('simpan_pengumuman', 'Admin\Informasi::simpan_pengumuman');
-        $routes->post('simpan_kategori_pengumuman', 'Admin\Informasi::simpan_kategori_pengumuman');
     });
 
     $routes->group('akademik', static function ($routes) {
