@@ -11,6 +11,12 @@
     .modal-header-custom { background: linear-gradient(-45deg, #4e54c8, #8f94fb); padding: 20px 25px; }
     .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
     .hover-lift:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    
+    .modal-body-scroll { max-height: 65vh; overflow-y: auto; overflow-x: hidden; }
+    .modal-body-scroll::-webkit-scrollbar { width: 6px; }
+    .modal-body-scroll::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
+    .modal-body-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    .modal-body-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 </style>
 
 <div class="row">
@@ -72,14 +78,14 @@
 </div>
 
 <div class="modal fade" id="modalTambah" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header modal-header-custom">
                 <h5 class="modal-title fw-bold text-white"><i class="fas fa-user-plus me-2"></i> Form Pendaftaran Siswa Baru</h5>
                 <button type="button" class="close text-white shadow-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <form action="<?= base_url('admin/akademik/simpan_siswa') ?>" method="post">
-                <div class="modal-body p-4 bg-light">
+                <div class="modal-body p-4 bg-light modal-body-scroll">
                     <div class="row g-4">
                         <div class="col-md-12">
                             <h6 class="fw-bold text-primary border-bottom pb-2 mb-3"><i class="fas fa-address-card me-2"></i>Data Diri & Akademik</h6>
@@ -224,14 +230,14 @@
 
 <?php if(isset($siswa) && count($siswa) > 0): foreach($siswa as $row): ?>
 <div class="modal fade" id="modalEdit<?= $row['id_siswa'] ?>" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header modal-header-custom">
                 <h5 class="modal-title fw-bold text-white"><i class="fas fa-edit me-2"></i> Edit Data Siswa</h5>
                 <button type="button" class="close text-white shadow-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <form action="<?= base_url('admin/akademik/update_siswa/' . $row['id_siswa']) ?>" method="post">
-                <div class="modal-body p-4 bg-light">
+                <div class="modal-body p-4 bg-light modal-body-scroll">
                     <div class="row g-4">
                         <div class="col-md-12">
                             <h6 class="fw-bold text-primary border-bottom pb-2 mb-3"><i class="fas fa-address-card me-2"></i>Data Diri & Akademik</h6>
