@@ -84,6 +84,9 @@
                                     <label class="fw-bold text-secondary mb-2 fs-7 text-uppercase">Kategori</label>
                                     <select name="id_kategori_p" class="form-control select2" required>
                                         <option value="">-- Pilih --</option>
+                                        <?php if(isset($kategori_list)): foreach($kategori_list as $kat): ?>
+                                            <option value="<?= $kat['id_kategori_p'] ?>"><?= $kat['nama_kategori'] ?></option>
+                                        <?php endforeach; endif; ?>
                                     </select>
                                 </div>
                                 <div class="alert alert-warning border-0 shadow-sm rounded-4 mt-4 bg-warning bg-opacity-10 text-dark">
