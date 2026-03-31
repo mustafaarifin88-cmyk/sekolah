@@ -1,6 +1,7 @@
 <?= $this->extend('layout/backend/template') ?>
 
 <?= $this->section('content') ?>
+<?php helper('text'); ?>
 <style>
     .modern-card {
         border-radius: 20px;
