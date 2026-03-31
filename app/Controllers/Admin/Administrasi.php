@@ -69,6 +69,7 @@ class Aplikasi extends BaseController
         return view('admin/aplikasi/menu', $data);
     }
 
+    // INI ADALAH FUNGSI YANG MENYEBABKAN ERROR JIKA TIDAK ADA
     public function simpan_menu()
     {
         $model = new MenuEksternalModel();
