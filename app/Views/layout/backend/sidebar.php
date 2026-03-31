@@ -1,15 +1,18 @@
 <?php 
-// Logika untuk mendeteksi menu aktif berdasarkan URL
 $request = \Config\Services::request();
 $uri = $request->getUri();
 $seg1 = $uri->getTotalSegments() >= 1 ? $uri->getSegment(1) : '';
 $seg2 = $uri->getTotalSegments() >= 2 ? $uri->getSegment(2) : '';
 $seg3 = $uri->getTotalSegments() >= 3 ? $uri->getSegment(3) : '';
 $role = session()->get('role');
+
+$identitasModel = new \App\Models\IdentitasSekolahModel();
+$identitas = $identitasModel->first();
+$logoSidebar = ($identitas && !empty($identitas['logo_sekolah'])) ? base_url('uploads/identitas/' . $identitas['logo_sekolah']) : base_url('assets/dist/img/AdminLTELogo.png');
+$namaSidebar = ($identitas && !empty($identitas['nama_sekolah'])) ? $identitas['nama_sekolah'] : 'SIS PANEL';
 ?>
 
 <style>
-    /* Custom Modern Sidebar Styles */
     .sidebar-modern {
         background: linear-gradient(180deg, #161625 0%, #202035 100%) !important;
         border-right: 1px solid rgba(255,255,255,0.05) !important;
@@ -19,9 +22,25 @@ $role = session()->get('role');
         border-bottom: 1px solid rgba(255,255,255,0.05) !important;
         background: rgba(0,0,0,0.2) !important;
         backdrop-filter: blur(10px);
+        display: flex !important;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 0.8125rem 1rem !important;
     }
-    
-    /* Scrollbar Kustom untuk Sidebar */
+    .brand-link .brand-image {
+        width: 35px;
+        height: 35px;
+        object-fit: contain;
+        margin-left: 0;
+        margin-right: 10px;
+    }
+    .brand-text {
+        font-size: 0.95rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 170px;
+    }
     .sidebar::-webkit-scrollbar {
         width: 6px;
     }
@@ -35,8 +54,6 @@ $role = session()->get('role');
     .sidebar::-webkit-scrollbar-thumb:hover {
         background: rgba(255,255,255,0.3);
     }
-
-    /* Efek Navigasi Modern */
     .nav-modern {
         border-radius: 12px;
         margin: 4px 12px;
@@ -45,8 +62,6 @@ $role = session()->get('role');
         position: relative;
         overflow: hidden;
     }
-    
-    /* Efek Kursor Hover */
     .nav-modern:hover {
         background: rgba(255,255,255,0.05) !important;
         color: #ffffff !important;
@@ -56,8 +71,6 @@ $role = session()->get('role');
         transform: scale(1.1) rotate(5deg);
         color: #38ef7d;
     }
-
-    /* Efek Menu Aktif (Glow & Gradient) */
     .nav-pills .nav-link.active, .nav-modern.active {
         background: linear-gradient(90deg, rgba(78,84,200,0.3) 0%, transparent 100%) !important;
         color: #ffffff !important;
@@ -70,8 +83,6 @@ $role = session()->get('role');
         color: #38ef7d !important;
         text-shadow: 0 0 10px rgba(56, 239, 125, 0.5);
     }
-
-    /* Header Navigasi */
     .nav-header {
         letter-spacing: 1.5px;
         font-size: 0.65rem !important;
@@ -79,8 +90,6 @@ $role = session()->get('role');
         padding-top: 1.5rem !important;
         padding-bottom: 0.5rem !important;
     }
-
-    /* Submenu Line Effect */
     .nav-treeview {
         position: relative;
     }
@@ -118,19 +127,15 @@ $role = session()->get('role');
 </style>
 
 <aside class="main-sidebar sidebar-modern shadow-lg elevation-4">
-    <!-- Brand Logo -->
-    <a href="<?= base_url('/') ?>" class="brand-link py-3 text-center" target="_blank">
-        <img src="<?= base_url('uploads/identitas/logo.png') ?>" alt="Logo" class="brand-image img-circle shadow-lg bg-white p-1" style="opacity: 1; transform: scale(1.1);">
-        <span class="brand-text font-weight-bold text-white fs-5 tracking-wide">SIS PANEL</span>
+    <a href="<?= base_url('/') ?>" class="brand-link" target="_blank">
+        <img src="<?= $logoSidebar ?>" alt="Logo" class="brand-image img-circle shadow-lg bg-white p-1">
+        <span class="brand-text font-weight-bold text-white tracking-wide"><?= strtoupper($namaSidebar) ?></span>
     </a>
 
-    <!-- Sidebar -->
     <div class="sidebar pb-4">
-        <!-- Sidebar Menu -->
         <nav class="mt-4">
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                 
-                <!-- DASHBOARD -->
                 <li class="nav-item">
                     <a href="<?= base_url($role . '/dashboard') ?>" class="nav-link nav-modern <?= ($seg2 == 'dashboard' || $seg2 == '') ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-laptop-house transition-all"></i>
@@ -138,12 +143,10 @@ $role = session()->get('role');
                     </a>
                 </li>
 
-                <!-- ===================== MENU ADMIN ===================== -->
                 <?php if($role === 'admin'): ?>
                 
                 <li class="nav-header text-uppercase">PENGATURAN & INFO</li>
                 
-                <!-- APLIKASI -->
                 <li class="nav-item <?= ($seg2 == 'aplikasi') ? 'menu-open' : '' ?>">
                     <a href="#" class="nav-link nav-modern <?= ($seg2 == 'aplikasi') ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-cogs transition-all"></i>
@@ -160,7 +163,6 @@ $role = session()->get('role');
                     </ul>
                 </li>
 
-                <!-- PUSAT INFORMASI -->
                 <li class="nav-item <?= ($seg2 == 'informasi') ? 'menu-open' : '' ?>">
                     <a href="#" class="nav-link nav-modern <?= ($seg2 == 'informasi') ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-bullhorn transition-all"></i>
@@ -176,7 +178,6 @@ $role = session()->get('role');
                 
                 <li class="nav-header text-uppercase">SISTEM MANAJEMEN</li>
                 
-                <!-- AKADEMIK -->
                 <li class="nav-item <?= ($seg2 == 'akademik') ? 'menu-open' : '' ?>">
                     <a href="#" class="nav-link nav-modern <?= ($seg2 == 'akademik') ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-graduation-cap transition-all"></i>
@@ -194,7 +195,6 @@ $role = session()->get('role');
                     </ul>
                 </li>
 
-                <!-- KESISWAAN -->
                 <li class="nav-item <?= ($seg2 == 'kesiswaan') ? 'menu-open' : '' ?>">
                     <a href="#" class="nav-link nav-modern <?= ($seg2 == 'kesiswaan') ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-users transition-all"></i>
@@ -209,7 +209,6 @@ $role = session()->get('role');
                     </ul>
                 </li>
 
-                <!-- KEPEGAWAIAN -->
                 <li class="nav-item <?= ($seg2 == 'kepegawaian') ? 'menu-open' : '' ?>">
                     <a href="#" class="nav-link nav-modern <?= ($seg2 == 'kepegawaian') ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-id-badge transition-all"></i>
@@ -225,7 +224,6 @@ $role = session()->get('role');
 
                 <li class="nav-header text-uppercase">OPERASIONAL</li>
 
-                <!-- KEUANGAN -->
                 <li class="nav-item <?= ($seg2 == 'keuangan') ? 'menu-open' : '' ?>">
                     <a href="#" class="nav-link nav-modern <?= ($seg2 == 'keuangan') ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-wallet transition-all"></i>
@@ -238,7 +236,6 @@ $role = session()->get('role');
                     </ul>
                 </li>
 
-                <!-- SARPRAS -->
                 <li class="nav-item <?= ($seg2 == 'sarpras') ? 'menu-open' : '' ?>">
                     <a href="#" class="nav-link nav-modern <?= ($seg2 == 'sarpras') ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-boxes transition-all"></i>
@@ -252,7 +249,6 @@ $role = session()->get('role');
                     </ul>
                 </li>
 
-                <!-- ADMINISTRASI -->
                 <li class="nav-item <?= ($seg2 == 'administrasi') ? 'menu-open' : '' ?>">
                     <a href="#" class="nav-link nav-modern <?= ($seg2 == 'administrasi') ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-folder-open transition-all"></i>
@@ -266,7 +262,6 @@ $role = session()->get('role');
                     </ul>
                 </li>
 
-                <!-- KELULUSAN -->
                 <li class="nav-item <?= ($seg2 == 'kelulusan') ? 'menu-open' : '' ?>">
                     <a href="#" class="nav-link nav-modern <?= ($seg2 == 'kelulusan') ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-award transition-all"></i>
@@ -279,8 +274,6 @@ $role = session()->get('role');
                 </li>
                 <?php endif; ?>
 
-
-                <!-- ===================== MENU GURU ===================== -->
                 <?php if($role === 'guru'): ?>
                 <li class="nav-header text-uppercase">AKADEMIK & INFO</li>
                 
@@ -320,8 +313,6 @@ $role = session()->get('role');
                 </li>
                 <?php endif; ?>
 
-
-                <!-- ===================== MENU WALI KELAS ===================== -->
                 <?php if($role === 'walikelas'): ?>
                 <li class="nav-header text-uppercase">PENGELOLAAN KELAS</li>
                 
@@ -365,8 +356,6 @@ $role = session()->get('role');
                 </li>
                 <?php endif; ?>
 
-
-                <!-- ===================== MENU SISWA ===================== -->
                 <?php if($role === 'siswa'): ?>
                 <li class="nav-header text-uppercase">LAYANAN SISWA</li>
                 
