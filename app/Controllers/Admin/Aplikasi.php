@@ -10,6 +10,9 @@ use App\Models\SliderModel;
 use App\Models\SetMapelGuruModel;
 use App\Models\SetKelasWaliModel;
 use App\Models\UserModel;
+use App\Models\GuruModel;
+use App\Models\MapelModel;
+use App\Models\KelasModel;
 
 class Aplikasi extends BaseController
 {
@@ -118,7 +121,7 @@ class Aplikasi extends BaseController
     public function menu()
     {
         $model = new MenuEksternalModel();
-        $data['menu'] = $model->findAll();
+        $data['menu'] = $model->orderBy('urutan', 'ASC')->findAll();
         return view('admin/aplikasi/menu', $data);
     }
 
@@ -197,8 +200,17 @@ class Aplikasi extends BaseController
 
     public function set_kelas()
     {
-        $model = new SetKelasWaliModel();
-        $data['set_kelas'] = $model->findAll();
+        $guruModel = new GuruModel();
+        $kelasModel = new KelasModel();
+        $db = \Config\Database::connect();
+        $builder = $db->table('set_kelas_wali');
+        $builder->select('set_kelas_wali.*, guru_tendik.nama_lengkap as nama_guru, kelas.nama_kelas');
+        $builder->join('guru_tendik', 'guru_tendik.id_guru = set_kelas_wali.id_guru', 'left');
+        $builder->join('kelas', 'kelas.id_kelas = set_kelas_wali.id_kelas', 'left');
+        
+        $data['set_kelas'] = $builder->get()->getResultArray();
+        $data['guru'] = $guruModel->findAll();
+        $data['kelas'] = $kelasModel->findAll();
         return view('admin/aplikasi/set_kelas', $data);
     }
 
@@ -233,8 +245,17 @@ class Aplikasi extends BaseController
 
     public function set_mapel()
     {
-        $model = new SetMapelGuruModel();
-        $data['set_mapel'] = $model->findAll();
+        $guruModel = new GuruModel();
+        $mapelModel = new MapelModel();
+        $db = \Config\Database::connect();
+        $builder = $db->table('set_mapel_guru');
+        $builder->select('set_mapel_guru.*, guru_tendik.nama_lengkap as nama_guru, mapel.nama_mapel');
+        $builder->join('guru_tendik', 'guru_tendik.id_guru = set_mapel_guru.id_guru', 'left');
+        $builder->join('mapel', 'mapel.id_mapel = set_mapel_guru.id_mapel', 'left');
+
+        $data['set_mapel'] = $builder->get()->getResultArray();
+        $data['guru'] = $guruModel->findAll();
+        $data['mapel'] = $mapelModel->findAll();
         return view('admin/aplikasi/set_mapel', $data);
     }
 
