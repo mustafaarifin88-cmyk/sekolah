@@ -20,11 +20,37 @@ class Akademik extends BaseController
         return view('admin/akademik/kurikulum', $data);
     }
 
+    public function simpan_kurikulum()
+    {
+        $model = new KurikulumModel();
+        
+        $data = [
+            'nama_kurikulum' => $this->request->getPost('nama_kurikulum')
+        ];
+
+        $model->insert($data);
+        
+        return redirect()->to(base_url('admin/akademik/kurikulum'))->with('success', 'Data Kurikulum berhasil ditambahkan.');
+    }
+
     public function kelas()
     {
         $model = new KelasModel();
         $data['kelas'] = $model->findAll();
         return view('admin/akademik/kelas', $data);
+    }
+
+    public function simpan_kelas()
+    {
+        $model = new KelasModel();
+        
+        $data = [
+            'nama_kelas' => $this->request->getPost('nama_kelas')
+        ];
+
+        $model->insert($data);
+        
+        return redirect()->to(base_url('admin/akademik/kelas'))->with('success', 'Data Kelas berhasil ditambahkan.');
     }
 
     public function siswa()
@@ -48,6 +74,19 @@ class Akademik extends BaseController
         return view('admin/akademik/mapel', $data);
     }
 
+    public function simpan_mapel()
+    {
+        $model = new MapelModel();
+        
+        $data = [
+            'nama_mapel' => $this->request->getPost('nama_mapel')
+        ];
+
+        $model->insert($data);
+        
+        return redirect()->to(base_url('admin/akademik/mapel'))->with('success', 'Data Mata Pelajaran berhasil ditambahkan.');
+    }
+
     public function jadwal()
     {
         $model = new JadwalModel();
@@ -64,8 +103,8 @@ class Akademik extends BaseController
 
     public function cetak_rapor()
     {
-        $model = new SiswaModel();
-        $data['siswa'] = $model->findAll();
+        $model = new RaporModel();
+        $data['rapor'] = $model->findAll();
         return view('admin/akademik/cetak_rapor', $data);
     }
 }
