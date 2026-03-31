@@ -8,6 +8,7 @@ use App\Models\BeritaModel;
 use App\Models\PengumumanModel;
 use App\Models\DataKelulusanModel;
 use App\Models\SiswaModel;
+use App\Models\SetKelulusanModel;
 
 class Frontend extends BaseController
 {
@@ -50,6 +51,16 @@ class Frontend extends BaseController
 
     public function cek_kelulusan()
     {
+        $settingModel = new SetKelulusanModel();
+        $setting = $settingModel->where('status', 'Aktif')->first();
+
+        if (!$setting) {
+            return $this->response->setJSON([
+                'status' => 'error',
+                'message' => 'Pengumuman kelulusan belum diaktifkan oleh admin sekolah.'
+            ]);
+        }
+
         $no_ujian = $this->request->getPost('no_ujian');
         $tgl_lahir = $this->request->getPost('tgl_lahir');
 
@@ -78,7 +89,7 @@ class Frontend extends BaseController
 
         return $this->response->setJSON([
             'status' => 'error',
-            'message' => 'Data tidak ditemukan atau tidak cocok.'
+            'message' => 'Data tidak ditemukan. Silakan periksa kembali Nomor Ujian dan Tanggal Lahir Anda.'
         ]);
     }
 }
