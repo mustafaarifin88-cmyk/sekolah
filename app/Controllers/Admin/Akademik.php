@@ -77,7 +77,13 @@ class Akademik extends BaseController
     {
         $model = new SiswaModel();
         $kelasModel = new KelasModel();
-        $data['siswa'] = $model->findAll();
+        
+        $db = \Config\Database::connect();
+        $builder = $db->table('siswa');
+        $builder->select('siswa.*, kelas.nama_kelas');
+        $builder->join('kelas', 'kelas.id_kelas = siswa.id_kelas', 'left');
+        $data['siswa'] = $builder->get()->getResultArray();
+        
         $data['kelas'] = $kelasModel->findAll();
         return view('admin/akademik/siswa', $data);
     }
@@ -85,8 +91,12 @@ class Akademik extends BaseController
     public function simpan_siswa()
     {
         $model = new SiswaModel();
+        
+        $id_kelas = $this->request->getPost('id_kelas');
+        $id_kelas = empty($id_kelas) ? null : $id_kelas;
+
         $data = [
-            'id_kelas' => $this->request->getPost('id_kelas'),
+            'id_kelas' => $id_kelas,
             'nama_siswa' => $this->request->getPost('nama_siswa'),
             'nis' => $this->request->getPost('nis'),
             'nisn' => $this->request->getPost('nisn'),
@@ -114,8 +124,12 @@ class Akademik extends BaseController
     public function update_siswa($id)
     {
         $model = new SiswaModel();
+        
+        $id_kelas = $this->request->getPost('id_kelas');
+        $id_kelas = empty($id_kelas) ? null : $id_kelas;
+
         $data = [
-            'id_kelas' => $this->request->getPost('id_kelas'),
+            'id_kelas' => $id_kelas,
             'nama_siswa' => $this->request->getPost('nama_siswa'),
             'nis' => $this->request->getPost('nis'),
             'nisn' => $this->request->getPost('nisn'),
