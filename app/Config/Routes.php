@@ -50,11 +50,19 @@ $routes->group('admin', ['filter' => 'admin'], static function ($routes) {
 
     $routes->group('akademik', static function ($routes) {
         $routes->get('kurikulum', 'Admin\Akademik::kurikulum');
+        $routes->post('simpan_kurikulum', 'Admin\Akademik::simpan_kurikulum');
         $routes->get('kelas', 'Admin\Akademik::kelas');
+        $routes->post('simpan_kelas', 'Admin\Akademik::simpan_kelas');
         $routes->get('siswa', 'Admin\Akademik::siswa');
+        $routes->post('simpan_siswa', 'Admin\Akademik::simpan_siswa');
+        $routes->post('import_siswa', 'Admin\Akademik::import_siswa');
         $routes->get('guru', 'Admin\Akademik::guru');
+        $routes->post('simpan_guru', 'Admin\Akademik::simpan_guru');
+        $routes->post('import_guru', 'Admin\Akademik::import_guru');
         $routes->get('mapel', 'Admin\Akademik::mapel');
+        $routes->post('simpan_mapel', 'Admin\Akademik::simpan_mapel');
         $routes->get('jadwal', 'Admin\Akademik::jadwal');
+        $routes->post('simpan_jadwal', 'Admin\Akademik::simpan_jadwal');
         $routes->get('pantau_rapor', 'Admin\Akademik::pantau_rapor');
         $routes->get('cetak_rapor', 'Admin\Akademik::cetak_rapor');
     });

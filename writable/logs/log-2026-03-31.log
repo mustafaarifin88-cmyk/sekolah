@@ -248,3 +248,5 @@ in APPPATH\Views\frontend\home.php on line 79.
 DEBUG - 2026-03-31 23:04:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2026-03-31 23:04:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2026-03-31 23:04:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-31 23:09:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-03-31 23:09:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
