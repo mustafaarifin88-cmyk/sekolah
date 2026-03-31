@@ -34,7 +34,28 @@ class Informasi extends BaseController
     public function pengumuman()
     {
         $model = new PengumumanModel();
+        $katModel = new KategoriPengumModel();
+        
         $data['pengumuman'] = $model->findAll();
+        $data['kategori_list'] = $katModel->findAll(); // Mengambil daftar kategori untuk dropdown
+        
         return view('admin/informasi/pengumuman', $data);
+    }
+
+    // FUNGSI BARU UNTUK MENYIMPAN DATA KE DATABASE
+    public function simpan_pengumuman()
+    {
+        $model = new PengumumanModel();
+        
+        $data = [
+            'id_kategori_p'    => $this->request->getPost('id_kategori_p'),
+            'judul_pengumuman' => $this->request->getPost('judul_pengumuman'),
+            'isi_pengumuman'   => $this->request->getPost('isi_pengumuman'),
+            'id_user'          => session()->get('id_user') // Mengambil ID admin/user yang sedang login
+        ];
+
+        $model->insert($data);
+        
+        return redirect()->to(base_url('admin/informasi/pengumuman'))->with('success', 'Pengumuman berhasil ditambahkan');
     }
 }
