@@ -15,6 +15,7 @@ $routes->get('logout', 'Auth::logout');
 $routes->group('admin', ['filter' => 'admin'], static function ($routes) {
     $routes->get('/', 'Admin\Dashboard::index');
     $routes->get('dashboard', 'Admin\Dashboard::index');
+    $routes->get('profil', 'Admin\Aplikasi::profil');
 
     $routes->group('aplikasi', static function ($routes) {
         $routes->get('identitas', 'Admin\Aplikasi::identitas');
