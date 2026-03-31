@@ -13,7 +13,6 @@
     .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
     .hover-lift:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
     
-    /* Custom Styling untuk Editor Blog-like */
     .note-editor.note-frame { border-radius: 12px; border: 2px solid #e2e8f0; overflow: hidden; }
     .note-toolbar { background-color: #f8fafc !important; border-bottom: 1px solid #e2e8f0 !important; padding: 10px !important; }
     .note-btn { border-radius: 6px !important; }
@@ -99,7 +98,6 @@
                                         <label class="fw-bold text-secondary mb-0 fs-7 text-uppercase">Isi Konten Berita</label>
                                         <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-pill fw-semibold"><i class="fas fa-info-circle me-1"></i> Gunakan ikon 🖼️ / 🎥 untuk upload media</span>
                                     </div>
-                                    <!-- ID khusus untuk editor blog -->
                                     <textarea name="isi_berita" id="blog-editor" required></textarea>
                                 </div>
                             </div>
@@ -147,8 +145,7 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Toggle Schedule Publish
+    window.addEventListener("load", function() {
         document.getElementById('status_publish').addEventListener('change', function() {
             var box = document.getElementById('box_tanggal');
             if(this.value === 'schedule') {
@@ -158,25 +155,21 @@
             }
         });
 
-        // Inisialisasi Editor Khusus Blog
-        if(typeof jQuery !== 'undefined') {
-            $('#blog-editor').summernote({
-                height: 450, // Lebih tinggi seperti Blogspot
-                placeholder: 'Tuliskan isi berita sekolah Anda di sini... Anda dapat memasukkan gambar atau video Youtube langsung ke dalam teks dengan menekan ikon Gambar/Video pada toolbar di atas.',
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-                    ['fontname', ['fontname']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['table', ['table']],
-                    // Tombol Insert Picture & Video diletakkan paling mencolok
-                    ['insert', ['picture', 'video', 'link', 'hr']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ]
-            });
-        }
+        $('#blog-editor').summernote({
+            height: 450,
+            placeholder: 'Tuliskan isi berita sekolah Anda di sini...',
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                ['fontname', ['fontname']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['picture', 'video', 'link', 'hr']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
     });
 </script>
 <?= $this->endSection() ?>
