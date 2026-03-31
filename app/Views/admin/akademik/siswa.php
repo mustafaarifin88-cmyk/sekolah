@@ -11,7 +11,6 @@
     .modal-header-custom { background: linear-gradient(-45deg, #4e54c8, #8f94fb); padding: 20px 25px; }
     .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
     .hover-lift:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-    
     .modal-body-scroll { max-height: 65vh; overflow-y: auto; overflow-x: hidden; }
     .modal-body-scroll::-webkit-scrollbar { width: 6px; }
     .modal-body-scroll::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 10px; }
@@ -45,6 +44,7 @@
                         <tr>
                             <th width="5%" class="text-center rounded-start">No</th>
                             <th>Info Siswa</th>
+                            <th>Akun Login</th>
                             <th>Kelas</th>
                             <th>TTL</th>
                             <th>Jenis Pendaftaran</th>
@@ -59,16 +59,19 @@
                                 <div class="fw-bold text-dark fs-6"><?= $row['nama_siswa'] ?></div>
                                 <span class="text-muted fs-7">NIS: <?= $row['nis'] ?> | NISN: <?= $row['nisn'] ?></span>
                             </td>
+                            <td>
+                                <span class="fw-semibold text-primary"><i class="fas fa-user-circle me-1"></i> <?= $row['username'] ?? '<em class="text-muted fs-7">Belum dibuat</em>' ?></span>
+                            </td>
                             <td><span class="badge bg-primary bg-opacity-10 text-primary border border-primary border-opacity-25 px-3 py-1 rounded-pill"><?= $row['nama_kelas'] ?? 'Belum ada kelas' ?></span></td>
                             <td class="text-secondary"><?= $row['tempat_lahir'] ?>, <?= date('d M Y', strtotime($row['tanggal_lahir'])) ?></td>
                             <td><span class="badge bg-light text-dark border px-3 py-1 rounded-pill"><?= $row['jenis_pendaftaran'] ?></span></td>
                             <td class="text-center">
                                 <button class="btn btn-sm btn-light text-primary rounded-circle shadow-sm me-1 hover-lift" data-toggle="modal" data-target="#modalEdit<?= $row['id_siswa'] ?>" style="width:35px; height:35px;"><i class="fas fa-edit"></i></button>
-                                <a href="<?= base_url('admin/akademik/hapus_siswa/' . $row['id_siswa']) ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus data siswa ini?')" class="btn btn-sm btn-light text-danger rounded-circle shadow-sm d-inline-flex align-items-center justify-content-center hover-lift" style="width:35px; height:35px;"><i class="fas fa-trash"></i></a>
+                                <a href="<?= base_url('admin/akademik/hapus_siswa/' . $row['id_siswa']) ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus data siswa ini beserta akun loginnya?')" class="btn btn-sm btn-light text-danger rounded-circle shadow-sm d-inline-flex align-items-center justify-content-center hover-lift" style="width:35px; height:35px;"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                         <?php endforeach; else: ?>
-                        <tr><td colspan="6" class="text-center py-5 text-muted"><i class="fas fa-users fs-1 mb-3 opacity-50 d-block"></i>Belum ada data siswa terdaftar.</td></tr>
+                        <tr><td colspan="7" class="text-center py-5 text-muted"><i class="fas fa-users fs-1 mb-3 opacity-50 d-block"></i>Belum ada data siswa terdaftar.</td></tr>
                         <?php endif; ?>
                     </tbody>
                 </table>
@@ -88,6 +91,22 @@
                 <div class="modal-body p-4 bg-light modal-body-scroll">
                     <div class="row g-4">
                         <div class="col-md-12">
+                            <h6 class="fw-bold text-primary border-bottom pb-2 mb-3"><i class="fas fa-key me-2"></i>Akun Akses Portal Siswa</h6>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary text-uppercase fs-7">Username Login</label>
+                                <input type="text" class="form-control modern-input" name="username" placeholder="Buat username siswa (Ex: siswa001)" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary text-uppercase fs-7">Password Akses</label>
+                                <input type="password" class="form-control modern-input" name="password" placeholder="Buat password untuk siswa" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mt-4">
                             <h6 class="fw-bold text-primary border-bottom pb-2 mb-3"><i class="fas fa-address-card me-2"></i>Data Diri & Akademik</h6>
                         </div>
                         <div class="col-md-6">
@@ -240,6 +259,22 @@
                 <div class="modal-body p-4 bg-light modal-body-scroll">
                     <div class="row g-4">
                         <div class="col-md-12">
+                            <h6 class="fw-bold text-primary border-bottom pb-2 mb-3"><i class="fas fa-key me-2"></i>Akun Akses Portal Siswa</h6>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary text-uppercase fs-7">Username Login</label>
+                                <input type="text" class="form-control modern-input" name="username" value="<?= $row['username'] ?? '' ?>" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary text-uppercase fs-7">Ubah Password Baru</label>
+                                <input type="password" class="form-control modern-input" name="password" placeholder="Abaikan bila tidak diubah">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 mt-4">
                             <h6 class="fw-bold text-primary border-bottom pb-2 mb-3"><i class="fas fa-address-card me-2"></i>Data Diri & Akademik</h6>
                         </div>
                         <div class="col-md-6">
