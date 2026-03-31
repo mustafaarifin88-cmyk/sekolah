@@ -12,6 +12,11 @@
     .thumb-preview { width: 80px; height: 60px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
     .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
     .hover-lift:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    
+    /* Custom Styling untuk Editor Blog-like */
+    .note-editor.note-frame { border-radius: 12px; border: 2px solid #e2e8f0; overflow: hidden; }
+    .note-toolbar { background-color: #f8fafc !important; border-bottom: 1px solid #e2e8f0 !important; padding: 10px !important; }
+    .note-btn { border-radius: 6px !important; }
 </style>
 
 <div class="row">
@@ -90,8 +95,12 @@
                                     <input type="text" class="form-control modern-input" name="judul_berita" placeholder="Masukkan judul berita yang menarik..." required>
                                 </div>
                                 <div>
-                                    <label class="fw-bold text-secondary mb-2 fs-7 text-uppercase">Isi Konten Berita</label>
-                                    <textarea name="isi_berita" class="summernote" required></textarea>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <label class="fw-bold text-secondary mb-0 fs-7 text-uppercase">Isi Konten Berita</label>
+                                        <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-pill fw-semibold"><i class="fas fa-info-circle me-1"></i> Gunakan ikon 🖼️ / 🎥 untuk upload media</span>
+                                    </div>
+                                    <!-- ID khusus untuk editor blog -->
+                                    <textarea name="isi_berita" id="blog-editor" required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -107,8 +116,9 @@
                                     </select>
                                 </div>
                                 <div class="mb-2">
-                                    <label class="fw-bold text-secondary mb-2 fs-7 text-uppercase">Thumbnail Gambar</label>
+                                    <label class="fw-bold text-secondary mb-2 fs-7 text-uppercase">Cover / Thumbnail Berita</label>
                                     <input type="file" class="form-control modern-input" name="thumbnail" accept="image/*" required>
+                                    <small class="text-muted mt-2 d-block">Gambar utama yang tampil di daftar berita luar.</small>
                                 </div>
                             </div>
                             <div class="bg-white p-4 rounded-4 shadow-sm">
@@ -138,6 +148,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        // Toggle Schedule Publish
         document.getElementById('status_publish').addEventListener('change', function() {
             var box = document.getElementById('box_tanggal');
             if(this.value === 'schedule') {
@@ -146,6 +157,26 @@
                 box.style.display = 'none';
             }
         });
+
+        // Inisialisasi Editor Khusus Blog
+        if(typeof jQuery !== 'undefined') {
+            $('#blog-editor').summernote({
+                height: 450, // Lebih tinggi seperti Blogspot
+                placeholder: 'Tuliskan isi berita sekolah Anda di sini... Anda dapat memasukkan gambar atau video Youtube langsung ke dalam teks dengan menekan ikon Gambar/Video pada toolbar di atas.',
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    // Tombol Insert Picture & Video diletakkan paling mencolok
+                    ['insert', ['picture', 'video', 'link', 'hr']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ]
+            });
+        }
     });
 </script>
 <?= $this->endSection() ?>
