@@ -9,6 +9,8 @@
     .modern-input:focus { border-color: #ff9a44; background: #fff; box-shadow: 0 0 0 4px rgba(255, 154, 68, 0.2); outline: none; }
     .modal-content { border-radius: 24px; border: none; overflow: hidden; }
     .modal-header { background: linear-gradient(135deg, #fc6076 0%, #ff9a44 100%); padding: 20px 24px; border-bottom: none; color: white; }
+    .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .hover-lift:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 </style>
 
 <div class="row">
@@ -22,7 +24,7 @@
                         <p class="text-muted fs-7 mb-0">Informasi dan pengumuman penting untuk warga sekolah.</p>
                     </div>
                 </div>
-                <button class="btn text-white rounded-pill px-4 py-2 fw-bold shadow-sm hover-lift" style="background: linear-gradient(135deg, #fc6076 0%, #ff9a44 100%); border: none;" data-bs-toggle="modal" data-bs-target="#modalTambah"><i class="fas fa-plus me-2"></i> Buat Pengumuman</button>
+                <button class="btn text-white rounded-pill px-4 py-2 fw-bold shadow-sm hover-lift" style="background: linear-gradient(135deg, #fc6076 0%, #ff9a44 100%); border: none;" data-toggle="modal" data-target="#modalTambah"><i class="fas fa-plus me-2"></i> Buat Pengumuman</button>
             </div>
             
             <div class="table-responsive">
@@ -42,8 +44,8 @@
                             <td><span class="fw-bold text-dark d-block mb-1"><?= $row['judul_pengumuman'] ?></span></td>
                             <td class="text-muted fw-semibold fs-7"><i class="far fa-calendar-alt me-1"></i> <?= date('d M Y', strtotime($row['created_at'])) ?></td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-light text-primary rounded-circle shadow-sm me-1" style="width:35px; height:35px;"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-sm btn-light text-danger rounded-circle shadow-sm" style="width:35px; height:35px;"><i class="fas fa-trash"></i></button>
+                                <button class="btn btn-sm btn-light text-primary rounded-circle shadow-sm me-1 hover-lift" style="width:35px; height:35px;"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-light text-danger rounded-circle shadow-sm hover-lift" style="width:35px; height:35px;"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
                         <?php endforeach; else: ?>
@@ -60,8 +62,10 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content shadow-lg border-0">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold"><i class="fas fa-edit me-2"></i> Tulis Pengumuman Baru</h5>
-                <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="modal"></button>
+                <h5 class="modal-title fw-bold text-white"><i class="fas fa-edit me-2"></i> Tulis Pengumuman Baru</h5>
+                <button type="button" class="close text-white shadow-none" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form action="<?= base_url('admin/informasi/simpan_pengumuman') ?>" method="post">
                 <div class="modal-body p-4 bg-light">
@@ -98,7 +102,7 @@
                     </div>
                 </div>
                 <div class="modal-footer border-0 p-4 bg-white d-flex justify-content-between">
-                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-secondary border shadow-sm" data-bs-dismiss="modal">Batalkan</button>
+                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-secondary border shadow-sm hover-lift" data-dismiss="modal">Batalkan</button>
                     <button type="submit" class="btn text-white rounded-pill px-5 fw-bold shadow-lg hover-lift border-0" style="background: linear-gradient(135deg, #fc6076 0%, #ff9a44 100%);"><i class="fas fa-paper-plane me-2"></i> Publikasikan</button>
                 </div>
             </form>
