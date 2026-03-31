@@ -10,6 +10,7 @@ use App\Models\GuruModel;
 use App\Models\MapelModel;
 use App\Models\JadwalModel;
 use App\Models\RaporModel;
+use App\Models\UserModel;
 
 class Akademik extends BaseController
 {
@@ -75,22 +76,24 @@ class Akademik extends BaseController
 
     public function siswa()
     {
-        $model = new SiswaModel();
         $kelasModel = new KelasModel();
-        
         $db = \Config\Database::connect();
-        $builder = $db->table('siswa');
-        $builder->select('siswa.*, kelas.nama_kelas');
-        $builder->join('kelas', 'kelas.id_kelas = siswa.id_kelas', 'left');
-        $data['siswa'] = $builder->get()->getResultArray();
         
+        $builder = $db->table('siswa');
+        $builder->select('siswa.*, kelas.nama_kelas, users.username');
+        $builder->join('kelas', 'kelas.id_kelas = siswa.id_kelas', 'left');
+        $builder->join('users', 'users.id_relasi = siswa.id_siswa AND users.role = "siswa"', 'left');
+        
+        $data['siswa'] = $builder->get()->getResultArray();
         $data['kelas'] = $kelasModel->findAll();
+        
         return view('admin/akademik/siswa', $data);
     }
 
     public function simpan_siswa()
     {
         $model = new SiswaModel();
+        $userModel = new UserModel();
         
         $id_kelas = $this->request->getPost('id_kelas');
         $id_kelas = empty($id_kelas) ? null : $id_kelas;
@@ -117,13 +120,25 @@ class Akademik extends BaseController
             'pekerjaan_orang_tua' => $this->request->getPost('pekerjaan_orang_tua'),
             'penghasilan_orang_tua' => $this->request->getPost('penghasilan_orang_tua')
         ];
+        
         $model->insert($data);
-        return redirect()->to(base_url('admin/akademik/siswa'))->with('success', 'Data Siswa berhasil ditambahkan.');
+        $id_siswa = $model->getInsertID();
+
+        $userData = [
+            'username' => $this->request->getPost('username'),
+            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'role' => 'siswa',
+            'id_relasi' => $id_siswa
+        ];
+        $userModel->insert($userData);
+
+        return redirect()->to(base_url('admin/akademik/siswa'))->with('success', 'Data Siswa & Akun Login berhasil ditambahkan.');
     }
 
     public function update_siswa($id)
     {
         $model = new SiswaModel();
+        $userModel = new UserModel();
         
         $id_kelas = $this->request->getPost('id_kelas');
         $id_kelas = empty($id_kelas) ? null : $id_kelas;
@@ -150,15 +165,40 @@ class Akademik extends BaseController
             'pekerjaan_orang_tua' => $this->request->getPost('pekerjaan_orang_tua'),
             'penghasilan_orang_tua' => $this->request->getPost('penghasilan_orang_tua')
         ];
+        
         $model->update($id, $data);
-        return redirect()->to(base_url('admin/akademik/siswa'))->with('success', 'Data Siswa berhasil diperbarui.');
+
+        $user = $userModel->where('id_relasi', $id)->where('role', 'siswa')->first();
+        $userData = ['username' => $this->request->getPost('username')];
+        $password = $this->request->getPost('password');
+        
+        if (!empty($password)) {
+            $userData['password'] = password_hash($password, PASSWORD_DEFAULT);
+        }
+
+        if ($user) {
+            $userModel->update($user['id_user'], $userData);
+        } else {
+            $userData['role'] = 'siswa';
+            $userData['id_relasi'] = $id;
+            if (empty($userData['password'])) {
+                $userData['password'] = password_hash('siswa123', PASSWORD_DEFAULT);
+            }
+            $userModel->insert($userData);
+        }
+
+        return redirect()->to(base_url('admin/akademik/siswa'))->with('success', 'Data Siswa & Akun Login berhasil diperbarui.');
     }
 
     public function hapus_siswa($id)
     {
         $model = new SiswaModel();
+        $userModel = new UserModel();
+        
+        $userModel->where('id_relasi', $id)->where('role', 'siswa')->delete();
         $model->delete($id);
-        return redirect()->to(base_url('admin/akademik/siswa'))->with('success', 'Data Siswa berhasil dihapus.');
+        
+        return redirect()->to(base_url('admin/akademik/siswa'))->with('success', 'Data Siswa dan Akun Login berhasil dihapus.');
     }
 
     public function import_siswa()
@@ -169,14 +209,20 @@ class Akademik extends BaseController
 
     public function guru()
     {
-        $model = new GuruModel();
-        $data['guru'] = $model->findAll();
+        $db = \Config\Database::connect();
+        $builder = $db->table('guru_tendik');
+        $builder->select('guru_tendik.*, users.username, users.role as role_user');
+        $builder->join('users', 'users.id_relasi = guru_tendik.id_guru AND users.role IN ("guru", "walikelas", "admin")', 'left');
+        
+        $data['guru'] = $builder->get()->getResultArray();
         return view('admin/akademik/guru', $data);
     }
 
     public function simpan_guru()
     {
         $model = new GuruModel();
+        $userModel = new UserModel();
+        
         $data = [
             'nama_lengkap' => $this->request->getPost('nama_lengkap'),
             'gelar_depan' => $this->request->getPost('gelar_depan'),
@@ -195,13 +241,26 @@ class Akademik extends BaseController
             'tahun_sk_pengangkatan' => $this->request->getPost('tahun_sk_pengangkatan'),
             'no_npwp' => $this->request->getPost('no_npwp')
         ];
+        
         $model->insert($data);
-        return redirect()->to(base_url('admin/akademik/guru'))->with('success', 'Data Guru/Tendik berhasil ditambahkan.');
+        $id_guru = $model->getInsertID();
+
+        $userData = [
+            'username' => $this->request->getPost('username'),
+            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+            'role' => $this->request->getPost('role_user'),
+            'id_relasi' => $id_guru
+        ];
+        $userModel->insert($userData);
+
+        return redirect()->to(base_url('admin/akademik/guru'))->with('success', 'Data Guru/Tendik & Akun Login berhasil ditambahkan.');
     }
 
     public function update_guru($id)
     {
         $model = new GuruModel();
+        $userModel = new UserModel();
+
         $data = [
             'nama_lengkap' => $this->request->getPost('nama_lengkap'),
             'gelar_depan' => $this->request->getPost('gelar_depan'),
@@ -220,15 +279,43 @@ class Akademik extends BaseController
             'tahun_sk_pengangkatan' => $this->request->getPost('tahun_sk_pengangkatan'),
             'no_npwp' => $this->request->getPost('no_npwp')
         ];
+        
         $model->update($id, $data);
-        return redirect()->to(base_url('admin/akademik/guru'))->with('success', 'Data Guru/Tendik berhasil diperbarui.');
+
+        $user = $userModel->where('id_relasi', $id)->whereIn('role', ['guru', 'walikelas', 'admin'])->first();
+        
+        $userData = [
+            'username' => $this->request->getPost('username'),
+            'role' => $this->request->getPost('role_user')
+        ];
+        
+        $password = $this->request->getPost('password');
+        if (!empty($password)) {
+            $userData['password'] = password_hash($password, PASSWORD_DEFAULT);
+        }
+
+        if ($user) {
+            $userModel->update($user['id_user'], $userData);
+        } else {
+            $userData['id_relasi'] = $id;
+            if (empty($userData['password'])) {
+                $userData['password'] = password_hash('guru123', PASSWORD_DEFAULT);
+            }
+            $userModel->insert($userData);
+        }
+
+        return redirect()->to(base_url('admin/akademik/guru'))->with('success', 'Data Guru/Tendik & Akun Login berhasil diperbarui.');
     }
 
     public function hapus_guru($id)
     {
         $model = new GuruModel();
+        $userModel = new UserModel();
+        
+        $userModel->where('id_relasi', $id)->whereIn('role', ['guru', 'walikelas', 'admin'])->delete();
         $model->delete($id);
-        return redirect()->to(base_url('admin/akademik/guru'))->with('success', 'Data Guru/Tendik berhasil dihapus.');
+        
+        return redirect()->to(base_url('admin/akademik/guru'))->with('success', 'Data Guru/Tendik & Akun Login berhasil dihapus.');
     }
 
     public function import_guru()

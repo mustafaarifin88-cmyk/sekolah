@@ -1,0 +1,1 @@
+ALTER TABLE `siswa` MODIFY `id_kelas` int(11) NULL DEFAULT NULL;
