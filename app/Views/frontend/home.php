@@ -1,6 +1,7 @@
 <?= $this->extend('layout/frontend/template') ?>
 
 <?= $this->section('content') ?>
+<?php helper('text'); ?>
 <div class="hero-section position-relative">
     <div id="heroCarousel" class="carousel slide carousel-fade h-100" data-bs-ride="carousel">
         <div class="carousel-inner h-100">
