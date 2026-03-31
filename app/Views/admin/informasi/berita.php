@@ -10,6 +10,8 @@
     .modal-content { border-radius: 24px; border: none; overflow: hidden; }
     .modal-header { background: linear-gradient(-45deg, #4e54c8, #8f94fb); padding: 20px 24px; border-bottom: none; color: white; }
     .thumb-preview { width: 80px; height: 60px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .hover-lift:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
 </style>
 
 <div class="row">
@@ -23,7 +25,7 @@
                         <p class="text-muted fs-7 mb-0">Kelola artikel, berita kegiatan, dan liputan sekolah.</p>
                     </div>
                 </div>
-                <button class="btn text-white rounded-pill px-4 py-2 fw-bold shadow-sm hover-lift bg-gradient-animated" data-bs-toggle="modal" data-bs-target="#modalTambah"><i class="fas fa-plus me-2"></i> Tulis Berita</button>
+                <button class="btn text-white rounded-pill px-4 py-2 fw-bold shadow-sm hover-lift bg-gradient-animated border-0" data-toggle="modal" data-target="#modalTambah"><i class="fas fa-plus me-2"></i> Tulis Berita</button>
             </div>
             
             <div class="table-responsive">
@@ -48,15 +50,15 @@
                             </td>
                             <td>
                                 <?php if($row['status_publish'] == 'publish'): ?>
-                                    <span class="badge bg-success bg-opacity-10 text-success px-3 py-1 rounded-pill"><i class="fas fa-globe me-1"></i> Published</span>
+                                    <span class="badge bg-success text-white px-3 py-1 rounded-pill"><i class="fas fa-globe me-1"></i> Published</span>
                                 <?php else: ?>
-                                    <span class="badge bg-warning bg-opacity-10 text-warning px-3 py-1 rounded-pill"><i class="fas fa-clock me-1"></i> Scheduled</span>
+                                    <span class="badge bg-warning text-dark px-3 py-1 rounded-pill"><i class="fas fa-clock me-1"></i> Scheduled</span>
                                 <?php endif; ?>
                             </td>
                             <td class="text-muted fw-semibold fs-7"><?= date('d M Y, H:i', strtotime($row['tanggal_publish'])) ?></td>
                             <td class="text-center">
-                                <button class="btn btn-sm btn-light text-primary rounded-circle shadow-sm me-1" style="width:35px; height:35px;"><i class="fas fa-edit"></i></button>
-                                <button class="btn btn-sm btn-light text-danger rounded-circle shadow-sm" style="width:35px; height:35px;"><i class="fas fa-trash"></i></button>
+                                <button class="btn btn-sm btn-light text-primary rounded-circle shadow-sm me-1 hover-lift" style="width:35px; height:35px;"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-light text-danger rounded-circle shadow-sm hover-lift" style="width:35px; height:35px;"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>
                         <?php endforeach; else: ?>
@@ -69,13 +71,14 @@
     </div>
 </div>
 
-<!-- Modal Tambah Berita -->
 <div class="modal fade" id="modalTambah" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content shadow-lg border-0">
             <div class="modal-header">
-                <h5 class="modal-title fw-bold"><i class="fas fa-pen-nib me-2"></i> Tulis Berita Baru</h5>
-                <button type="button" class="btn-close btn-close-white shadow-none" data-bs-dismiss="modal"></button>
+                <h5 class="modal-title fw-bold text-white"><i class="fas fa-pen-nib me-2"></i> Tulis Berita Baru</h5>
+                <button type="button" class="close text-white shadow-none" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <form action="<?= base_url('admin/informasi/simpan_berita') ?>" method="post" enctype="multipart/form-data">
                 <div class="modal-body p-4 bg-light">
@@ -98,9 +101,12 @@
                                     <label class="fw-bold text-secondary mb-2 fs-7 text-uppercase">Kategori</label>
                                     <select name="id_kategori_b" class="form-control select2" required>
                                         <option value="">-- Pilih Kategori --</option>
+                                        <?php if(isset($kategori_list)): foreach($kategori_list as $kat): ?>
+                                            <option value="<?= $kat['id_kategori_b'] ?>"><?= $kat['nama_kategori'] ?></option>
+                                        <?php endforeach; endif; ?>
                                     </select>
                                 </div>
-                                <div class="mb-4">
+                                <div class="mb-2">
                                     <label class="fw-bold text-secondary mb-2 fs-7 text-uppercase">Thumbnail Gambar</label>
                                     <input type="file" class="form-control modern-input" name="thumbnail" accept="image/*" required>
                                 </div>
@@ -122,7 +128,7 @@
                     </div>
                 </div>
                 <div class="modal-footer border-0 p-4 bg-white d-flex justify-content-between">
-                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-secondary border shadow-sm" data-bs-dismiss="modal">Batalkan</button>
+                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-secondary border shadow-sm hover-lift" data-dismiss="modal">Batalkan</button>
                     <button type="submit" class="btn btn-primary rounded-pill px-5 fw-bold text-white shadow-lg hover-lift bg-gradient-animated border-0"><i class="fas fa-paper-plane me-2"></i> Terbitkan Berita</button>
                 </div>
             </form>
