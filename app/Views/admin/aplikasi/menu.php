@@ -51,4 +51,39 @@
         </div>
     </div>
 </div>
+
+<!-- Modal Tambah Menu -->
+<div class="modal fade" id="modalTambah" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header bg-gradient-animated text-white border-0 p-4">
+                <h5 class="modal-title fw-bold"><i class="fas fa-plus-circle me-2"></i> Tambah Menu Baru</h5>
+                <button type="button" class="close text-white shadow-none" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="<?= base_url('admin/aplikasi/simpan_menu') ?>" method="post">
+                <div class="modal-body p-4">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-secondary text-uppercase fs-7 tracking-wider">Nama Menu</label>
+                        <input type="text" class="form-control form-control-lg bg-light border-0 shadow-none rounded-3" name="nama_menu" placeholder="Contoh: PPDB Online" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-secondary text-uppercase fs-7 tracking-wider">Link / Tautan</label>
+                        <input type="url" class="form-control form-control-lg bg-light border-0 shadow-none rounded-3" name="link_eksternal" placeholder="Contoh: https://ppdb.sekolah.sch.id" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label fw-bold text-secondary text-uppercase fs-7 tracking-wider">Urutan Tampil</label>
+                        <input type="number" class="form-control form-control-lg bg-light border-0 shadow-none rounded-3" name="urutan" placeholder="Contoh: 1" value="0" required>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 p-4 pt-0">
+                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary rounded-pill px-5 fw-bold shadow-sm bg-gradient-animated border-0 hover-lift">Simpan Menu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <?= $this->endSection() ?>
