@@ -2,7 +2,7 @@
 $identitasModel = new \App\Models\IdentitasSekolahModel();
 $identitas = $identitasModel->first();
 $logoFrontend = ($identitas && !empty($identitas['logo_sekolah'])) ? base_url('uploads/identitas/' . $identitas['logo_sekolah']) : base_url('assets/dist/img/AdminLTELogo.png');
-$namaFrontend = ($identitas && !empty($identitas['nama_sekolah'])) ? $identitas['nama_sekolah'] : 'SIS Web';
+$namaFrontend = ($identitas && !empty($identitas['nama_sekolah'])) ? $identitas['nama_sekolah'] : 'Sistem Informasi Sekolah';
 
 $menuModel = new \App\Models\MenuEksternalModel();
 $menuEksternal = $menuModel->orderBy('urutan', 'ASC')->findAll();
@@ -11,162 +11,157 @@ $settingKelulusan = new \App\Models\SetKelulusanModel();
 $isKelulusanAktif = $settingKelulusan->where('status', 'Aktif')->first();
 
 $tema = $identitas['tema_header'] ?? 'theme-blue';
-$gradienClass = '';
-if($tema == 'theme-blue') $gradienClass = 'bg-gradient-blue';
-elseif($tema == 'theme-dark') $gradienClass = 'bg-gradient-dark';
-else $gradienClass = 'bg-gradient-animated';
+$gradienTop = 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%)';
+$gradienBottom = 'linear-gradient(135deg, #2563eb 0%, #4f46e5 100%)';
+if($tema == 'theme-dark') $gradienBottom = 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)';
+elseif($tema == 'theme-animated') $gradienBottom = 'linear-gradient(-45deg, #4e54c8, #8f94fb, #11998e, #38ef7d)';
 ?>
 
 <style>
-    .glass-navbar {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        transition: all 0.4s ease;
-    }
-    .glass-navbar.scrolled {
-        background: rgba(255, 255, 255, 0.95);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    }
-    .nav-link-custom {
+    .top-header {
+        background: <?= $gradienTop ?>;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        z-index: 1040;
         position: relative;
-        color: #fff !important;
+    }
+    .top-header .brand-text {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-weight: 800;
+        font-size: 1.3rem;
+        letter-spacing: 0.5px;
+        color: #fff;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .btn-top-action {
+        border-radius: 8px;
+        padding: 6px 15px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .btn-top-action:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+    
+    .bottom-navbar {
+        background: <?= $gradienBottom ?>;
+        <?php if($tema == 'theme-animated'): ?> background-size: 400% 400%; animation: gradientMove 15s ease infinite; <?php endif; ?>
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        z-index: 1030;
+        transition: all 0.3s ease;
+    }
+    .bottom-navbar.sticky-top {
+        position: sticky;
+        top: 0;
+    }
+    .nav-custom .nav-item { margin: 0 2px; }
+    .nav-custom .nav-link {
+        color: rgba(255,255,255,0.9) !important;
         font-weight: 600;
-        padding: 0.5rem 1rem;
-        transition: color 0.3s ease;
+        font-size: 0.95rem;
+        padding: 12px 18px !important;
+        border-radius: 10px;
+        transition: all 0.3s;
     }
-    .glass-navbar.scrolled .nav-link-custom {
-        color: #1e293b !important;
+    .nav-custom .nav-link:hover, .nav-custom .nav-link.active {
+        background: rgba(255,255,255,0.15);
+        color: #fff !important;
     }
-    .nav-link-custom::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 2px;
-        bottom: 0;
-        left: 50%;
-        background-color: #fff;
-        transition: all 0.3s ease;
-        transform: translateX(-50%);
+    
+    @media all and (min-width: 992px) {
+        .navbar .nav-item.dropdown:hover .dropdown-menu { display: block; opacity: 1; transform: translateY(0); }
+        .navbar .nav-item.dropdown .dropdown-menu {
+            display: block; opacity: 0; transform: translateY(10px); transition: all 0.3s ease; pointer-events: none;
+            margin-top: 0; border: none; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); padding: 10px;
+        }
+        .navbar .nav-item.dropdown:hover .dropdown-menu { pointer-events: auto; }
     }
-    .glass-navbar.scrolled .nav-link-custom::after {
-        background-color: #4facfe;
+    .dropdown-menu .dropdown-item {
+        border-radius: 8px; padding: 10px 15px; font-weight: 600; color: #475569; transition: all 0.2s;
     }
-    .nav-link-custom:hover::after {
-        width: 80%;
-    }
-    .btn-glow {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        color: white !important;
-        border: none;
-        position: relative;
-        z-index: 1;
-        overflow: hidden;
-        transition: all 0.3s ease;
-    }
-    .btn-glow::before {
-        content: '';
-        position: absolute;
-        top: 0; left: -100%; width: 100%; height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-        transition: all 0.5s ease;
-        z-index: -1;
-    }
-    .btn-glow:hover::before {
-        left: 100%;
-    }
-    .btn-glow:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(79, 172, 254, 0.4);
-    }
-    .bg-gradient-animated {
-        background: linear-gradient(-45deg, #4e54c8, #8f94fb, #11998e, #38ef7d);
-        background-size: 400% 400%;
-        animation: gradientMove 15s ease infinite;
-    }
-    @keyframes gradientMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
+    .dropdown-menu .dropdown-item:hover { background: #f1f5f9; color: #2563eb; padding-left: 20px; }
 </style>
 
-<nav class="navbar navbar-expand-lg fixed-top glass-navbar py-3" id="mainNav">
+<div class="top-header">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="<?= base_url('/') ?>">
-            <img src="<?= $logoFrontend ?>" alt="Logo" class="rounded-circle shadow-sm me-2" style="width:50px; height:50px; object-fit:cover; border: 2px solid #fff;">
-            <span class="fw-bolder fs-4 text-truncate text-white brand-text" style="max-width: 250px; letter-spacing: 1px; text-shadow: 0 2px 4px rgba(0,0,0,0.2);"><?= strtoupper($namaFrontend) ?></span>
-        </a>
-        
-        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <i class="fas fa-bars fs-3 text-white toggler-icon"></i>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto align-items-center gap-2">
-                <li class="nav-item"><a class="nav-link nav-link-custom" href="<?= base_url('/') ?>">Beranda</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link nav-link-custom dropdown-toggle" href="#" data-bs-toggle="dropdown">Pusat Informasi</a>
-                    <ul class="dropdown-menu border-0 shadow-lg rounded-4 overflow-hidden fade-down">
-                        <li><a class="dropdown-item py-2 fw-semibold" href="<?= base_url('berita') ?>"><i class="fas fa-newspaper me-2 text-primary"></i> Berita & Artikel</a></li>
-                        <li><a class="dropdown-item py-2 fw-semibold" href="<?= base_url('pengumuman') ?>"><i class="fas fa-bullhorn me-2 text-warning"></i> Pengumuman</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link nav-link-custom dropdown-toggle" href="#" data-bs-toggle="dropdown">Profil Sekolah</a>
-                    <ul class="dropdown-menu border-0 shadow-lg rounded-4 overflow-hidden fade-down">
-                        <li><a class="dropdown-item py-2 fw-semibold" href="#"><i class="fas fa-info-circle me-2 text-info"></i> Tentang Kami</a></li>
-                        <li><a class="dropdown-item py-2 fw-semibold" href="#"><i class="fas fa-bullseye me-2 text-danger"></i> Visi Misi</a></li>
-                        <li><a class="dropdown-item py-2 fw-semibold" href="#"><i class="fas fa-chalkboard-teacher me-2 text-success"></i> Guru & Tendik</a></li>
-                    </ul>
-                </li>
-
-                <?php if(isset($menuEksternal) && count($menuEksternal) > 0): ?>
-                    <?php foreach($menuEksternal as $m): ?>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-custom" href="<?= $m['link_eksternal'] ?>" target="_blank"><?= $m['nama_menu'] ?></a>
-                        </li>
-                    <?php endforeach; ?>
-                <?php endif; ?>
-            </ul>
-
-            <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-center justify-content-lg-start mb-3 mb-lg-0">
+                <img src="<?= $logoFrontend ?>" alt="Logo" class="rounded-circle shadow-sm bg-white p-1 me-3" style="width:55px; height:55px; object-fit:cover;">
+                <span class="brand-text"><?= strtoupper($namaFrontend) ?></span>
+            </div>
+            <div class="col-lg-6 col-md-12 d-flex align-items-center justify-content-center justify-content-lg-end gap-2 flex-wrap">
+                <?php if(isset($menuEksternal) && count($menuEksternal) > 0): foreach($menuEksternal as $m): ?>
+                    <a href="<?= $m['link_eksternal'] ?>" target="_blank" class="btn btn-sm btn-outline-light btn-top-action"><i class="fas fa-external-link-alt me-1"></i> <?= $m['nama_menu'] ?></a>
+                <?php endforeach; endif; ?>
+                
                 <?php if($isKelulusanAktif): ?>
-                <button type="button" class="btn btn-glow rounded-pill px-4 py-2 fw-bold" data-bs-toggle="modal" data-bs-target="#modalKelulusan">
-                    <i class="fas fa-graduation-cap me-2"></i>Cek Kelulusan
-                </button>
+                    <button type="button" class="btn btn-sm btn-warning text-dark btn-top-action" data-bs-toggle="modal" data-bs-target="#modalKelulusan">
+                        <i class="fas fa-graduation-cap me-1"></i> Cek Kelulusan
+                    </button>
                 <?php endif; ?>
                 
-                <a href="<?= base_url('login') ?>" class="btn btn-light rounded-pill px-4 py-2 fw-bold text-primary shadow-sm hover-scale">
-                    <i class="fas fa-sign-in-alt me-2"></i>Masuk
+                <a href="<?= base_url('login') ?>" class="btn btn-sm btn-light text-primary btn-top-action shadow-sm">
+                    <i class="fas fa-sign-in-alt me-1"></i> Portal Login
                 </a>
             </div>
         </div>
     </div>
-</nav>
+</div>
 
-<script>
-    window.addEventListener('scroll', function() {
-        const nav = document.getElementById('mainNav');
-        const brandText = document.querySelector('.brand-text');
-        const toggler = document.querySelector('.toggler-icon');
-        if (window.scrollY > 50) {
-            nav.classList.add('scrolled');
-            brandText.classList.remove('text-white');
-            brandText.classList.add('text-dark');
-            if(toggler) {
-                toggler.classList.remove('text-white');
-                toggler.classList.add('text-dark');
-            }
-        } else {
-            nav.classList.remove('scrolled');
-            brandText.classList.add('text-white');
-            brandText.classList.remove('text-dark');
-            if(toggler) {
-                toggler.classList.add('text-white');
-                toggler.classList.remove('text-dark');
-            }
-        }
-    });
-</script>
+<nav class="navbar navbar-expand-lg bottom-navbar sticky-top py-1 py-lg-0">
+    <div class="container">
+        <button class="navbar-toggler border-0 shadow-none text-white w-100 d-lg-none py-2" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <i class="fas fa-bars me-2"></i> Menu Navigasi
+        </button>
+        
+        <div class="collapse navbar-collapse" id="mainNav">
+            <ul class="navbar-nav mx-auto nav-custom py-2 py-lg-0">
+                <li class="nav-item"><a class="nav-link" href="<?= base_url('/') ?>"><i class="fas fa-home me-1"></i> Home</a></li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-graduation-cap me-1"></i> Akademik</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="<?= base_url('akademik/kurikulum') ?>"><i class="fas fa-book-open me-2 text-primary"></i> Data Kurikulum</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('akademik/kelas') ?>"><i class="fas fa-door-open me-2 text-success"></i> Data Kelas</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('akademik/siswa') ?>"><i class="fas fa-users me-2 text-info"></i> Data Siswa</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('akademik/guru') ?>"><i class="fas fa-chalkboard-teacher me-2 text-warning"></i> Data Guru</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="<?= base_url('akademik/visimisi') ?>"><i class="fas fa-bullseye me-2 text-danger"></i> Visi Misi Sekolah</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('akademik/prestasi') ?>"><i class="fas fa-trophy me-2 text-warning"></i> Prestasi Siswa</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-info-circle me-1"></i> Pusat Informasi</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="<?= base_url('berita') ?>"><i class="fas fa-newspaper me-2 text-primary"></i> Berita & Artikel</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('pengumuman') ?>"><i class="fas fa-bullhorn me-2 text-danger"></i> Papan Pengumuman</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-building me-1"></i> Sarana & Prasarana</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-boxes me-2 text-success"></i> Inventaris & Ruangan</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-chart-pie me-1"></i> Transparansi</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-hand-holding-usd me-2 text-success"></i> Penerimaan Dana BOS</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-file-invoice-dollar me-2 text-danger"></i> Laporan Pengeluaran</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-folder-open me-1"></i> Arsip Digital</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#"><i class="fas fa-envelope-open-text me-2 text-primary"></i> Arsip Dokumen</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -3,252 +3,167 @@
 <?= $this->section('content') ?>
 <?php helper('text'); ?>
 <style>
-    .hero-container {
-        height: 100vh;
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-        margin-top: -80px;
-    }
-    .carousel-item img {
-        height: 100vh;
-        object-fit: cover;
-        filter: brightness(0.6);
-        transform: scale(1.05);
-        transition: transform 10s ease;
-    }
-    .carousel-item.active img {
-        transform: scale(1);
-    }
-    .hero-glass-card {
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        border-radius: 24px;
-        padding: 40px;
-        transform: translateY(50px);
-        opacity: 0;
-        animation: slideUpFade 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
-    }
-    @keyframes slideUpFade {
-        to { transform: translateY(0); opacity: 1; }
-    }
-    .section-profile {
-        position: relative;
-        z-index: 10;
-        margin-top: -100px;
-    }
-    .profile-card {
-        background: #ffffff;
-        border-radius: 30px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        border: none;
-        overflow: hidden;
-    }
-    .profile-img-wrap {
-        position: relative;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-    }
-    .profile-img-wrap::after {
-        content: '';
-        position: absolute;
-        bottom: 0; left: 0; width: 100%; height: 50%;
-        background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, transparent 100%);
-    }
-    .profile-img {
-        width: 100%;
-        height: 500px;
-        object-fit: cover;
-        transition: transform 0.5s ease;
-    }
-    .profile-img-wrap:hover .profile-img {
-        transform: scale(1.05);
-    }
-    .profile-name-tag {
-        position: absolute;
-        bottom: 20px;
-        left: 20px;
-        z-index: 2;
-    }
-    .news-card {
-        border: none;
-        border-radius: 24px;
-        background: #fff;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        overflow: hidden;
-    }
-    .news-card:hover {
-        transform: translateY(-15px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    }
-    .news-img-wrap {
-        overflow: hidden;
-        height: 240px;
-        position: relative;
-    }
-    .news-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.6s ease;
-    }
-    .news-card:hover .news-img {
-        transform: scale(1.1);
-    }
-    .news-date-badge {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: rgba(255,255,255,0.9);
-        backdrop-filter: blur(10px);
-        padding: 8px 15px;
-        border-radius: 12px;
-        font-weight: 700;
-        color: #4e54c8;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        z-index: 2;
-    }
-    .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-    .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-    .gradient-text {
-        background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
+    body { background-color: #f8fafc; }
+    .hero-carousel { border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin-bottom: 40px; margin-top: 20px;}
+    .carousel-item img { height: 500px; object-fit: cover; filter: brightness(0.65); }
+    .carousel-caption { bottom: 20%; left: 5%; right: 5%; text-align: left; }
+    .hero-title { font-weight: 800; font-size: 2.5rem; text-shadow: 0 4px 10px rgba(0,0,0,0.5); margin-bottom: 15px; }
+    .content-block { background: #fff; border-radius: 20px; padding: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); margin-bottom: 40px; }
+    .kepsek-img { width: 150px; height: 150px; object-fit: cover; border-radius: 50%; border: 5px solid #f1f5f9; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .widget-box { background: #fff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.03); padding: 25px; margin-bottom: 30px; position: sticky; top: 90px; }
+    .widget-title { font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #1e293b; border-bottom: 3px solid #2563eb; padding-bottom: 10px; margin-bottom: 20px; display: inline-block; }
+    .widget-item { display: flex; gap: 15px; margin-bottom: 15px; border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; }
+    .widget-item:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
+    .widget-img { width: 70px; height: 70px; border-radius: 12px; object-fit: cover; }
+    .widget-text h6 { font-size: 0.95rem; font-weight: 700; margin-bottom: 5px; line-height: 1.4; color: #334155; transition: color 0.3s; }
+    .widget-text h6:hover { color: #2563eb; }
+    .widget-date { font-size: 0.75rem; color: #94a3b8; }
+    .archive-list { list-style: none; padding: 0; margin: 0; }
+    .archive-list li { margin-bottom: 10px; }
+    .archive-list a { display: flex; justify-content: space-between; color: #475569; text-decoration: none; font-weight: 600; padding: 10px 15px; border-radius: 10px; background: #f8fafc; transition: all 0.3s; }
+    .archive-list a:hover { background: #2563eb; color: #fff; transform: translateX(5px); }
 </style>
 
-<div class="hero-container">
-    <div id="heroCarousel" class="carousel slide carousel-fade h-100" data-bs-ride="carousel">
-        <div class="carousel-inner h-100">
-            <?php if(isset($slider) && count($slider) > 0): ?>
-                <?php foreach($slider as $key => $s): ?>
-                <div class="carousel-item h-100 <?= $key == 0 ? 'active' : '' ?>">
-                    <img src="<?= base_url('uploads/slider/' . $s['foto']) ?>" class="d-block w-100" alt="Slider">
-                    <div class="carousel-caption d-flex align-items-center justify-content-start h-100 text-start" style="left: 8%; right: 8%;">
-                        <div class="hero-glass-card col-lg-7 col-md-9">
-                            <span class="badge bg-primary bg-opacity-25 text-white rounded-pill px-4 py-2 fs-6 mb-4 border border-white border-opacity-25">SELAMAT DATANG</span>
-                            <h1 class="fw-bolder text-white display-4 mb-4" style="line-height: 1.2; text-shadow: 0 4px 10px rgba(0,0,0,0.3);"><?= $s['judul'] ?></h1>
-                            <p class="text-white opacity-75 fs-5 mb-5 line-clamp-3"><?= $s['keterangan'] ?></p>
-                            <a href="#profil-sekolah" class="btn btn-light rounded-pill px-5 py-3 fw-bold text-primary shadow-lg hover-scale">Jelajahi Sekarang <i class="fas fa-arrow-right ms-2"></i></a>
+<div class="container pb-5">
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div id="heroCarousel" class="carousel slide carousel-fade hero-carousel" data-bs-ride="carousel">
+                <div class="carousel-inner h-100">
+                    <?php if(isset($slider) && count($slider) > 0): ?>
+                        <?php foreach($slider as $key => $s): ?>
+                        <div class="carousel-item h-100 <?= $key == 0 ? 'active' : '' ?>">
+                            <img src="<?= base_url('uploads/slider/' . $s['foto']) ?>" class="d-block w-100" alt="Slider">
+                            <div class="carousel-caption">
+                                <span class="badge bg-primary px-3 py-2 rounded-pill mb-3 fs-6">INFO SEKOLAH</span>
+                                <h1 class="hero-title text-white"><?= $s['judul'] ?></h1>
+                                <p class="text-white opacity-75 fs-5 mb-0 d-none d-md-block"><?= word_limiter($s['keterangan'], 20) ?></p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <div class="carousel-item h-100 active bg-gradient-animated">
-                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center h-100">
-                        <div class="hero-glass-card text-center text-white p-5">
-                            <h1 class="display-3 fw-bolder mb-3">Sistem Informasi Sekolah</h1>
-                            <p class="fs-4 opacity-75 mb-0">Platform digital modern untuk layanan pendidikan terpadu.</p>
-                        </div>
-                    </div>
-                </div>
-            <?php endif; ?>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon bg-dark rounded-circle p-3 bg-opacity-50" aria-hidden="true"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon bg-dark rounded-circle p-3 bg-opacity-50" aria-hidden="true"></span>
-        </button>
-    </div>
-</div>
-
-<div class="section-profile container" id="profil-sekolah">
-    <div class="profile-card p-4 p-md-5">
-        <div class="row align-items-center g-5">
-            <div class="col-lg-5">
-                <div class="profile-img-wrap">
-                    <?php $fotoKepsek = (isset($identitas['foto_kepsek']) && $identitas['foto_kepsek']) ? base_url('uploads/identitas/' . $identitas['foto_kepsek']) : base_url('assets/dist/img/avatar5.png'); ?>
-                    <img src="<?= $fotoKepsek ?>" alt="Kepala Sekolah" class="profile-img">
-                    <div class="profile-name-tag text-white">
-                        <h4 class="fw-bold mb-1"><?= $identitas['nama_kepsek'] ?? 'Nama Kepala Sekolah' ?></h4>
-                        <span class="badge bg-primary px-3 py-2 rounded-pill">Kepala Sekolah</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-7">
-                <h6 class="text-primary fw-bold tracking-wider text-uppercase mb-2">Prakata & Tujuan</h6>
-                <h2 class="fw-bolder text-dark mb-4 display-6">Visi & Misi <span class="gradient-text">Sekolah</span></h2>
-                <div class="text-secondary lh-lg fs-6">
-                    <?php if(isset($identitas['visi_misi']) && !empty($identitas['visi_misi'])): ?>
-                        <?= $identitas['visi_misi'] ?>
+                        <?php endforeach; ?>
                     <?php else: ?>
-                        <p>Visi dan misi sekolah belum diatur oleh administrator. Silakan perbarui melalui panel admin.</p>
+                        <div class="carousel-item h-100 active bg-dark">
+                            <div class="carousel-caption text-center" style="bottom: 40%;">
+                                <h1 class="hero-title text-white">Selamat Datang di Website Sekolah</h1>
+                            </div>
+                        </div>
                     <?php endif; ?>
                 </div>
-                <div class="mt-5 d-flex gap-3">
-                    <div class="d-flex align-items-center bg-light rounded-pill px-4 py-3 border">
-                        <i class="fas fa-graduation-cap fs-3 text-primary me-3"></i>
-                        <div>
-                            <h5 class="fw-bold m-0 text-dark">Pendidikan</h5>
-                            <small class="text-muted">Berkualitas Tinggi</small>
-                        </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                </button>
+            </div>
+
+            <div class="content-block">
+                <div class="row align-items-center">
+                    <div class="col-md-3 text-center mb-4 mb-md-0">
+                        <?php $fotoKepsek = (isset($identitas['foto_kepsek']) && $identitas['foto_kepsek']) ? base_url('uploads/identitas/' . $identitas['foto_kepsek']) : base_url('assets/dist/img/avatar5.png'); ?>
+                        <img src="<?= $fotoKepsek ?>" alt="Kepala Sekolah" class="kepsek-img mb-3">
+                        <h6 class="fw-bold text-dark m-0"><?= $identitas['nama_kepsek'] ?? 'Nama Kepala Sekolah' ?></h6>
+                        <span class="badge bg-secondary rounded-pill px-2 mt-1 fs-7">Kepala Sekolah</span>
                     </div>
-                    <div class="d-flex align-items-center bg-light rounded-pill px-4 py-3 border">
-                        <i class="fas fa-laptop-code fs-3 text-success me-3"></i>
-                        <div>
-                            <h5 class="fw-bold m-0 text-dark">Fasilitas</h5>
-                            <small class="text-muted">Modern & Lengkap</small>
+                    <div class="col-md-9 border-start ps-md-4">
+                        <h3 class="fw-bolder text-dark mb-3">Visi & Misi Sekolah</h3>
+                        <div class="text-secondary lh-lg fs-6" style="max-height: 200px; overflow: hidden; position: relative;">
+                            <?php if(isset($identitas['visi_misi']) && !empty($identitas['visi_misi'])): ?>
+                                <?= $identitas['visi_misi'] ?>
+                            <?php else: ?>
+                                <p>Visi dan misi sekolah belum diatur oleh administrator.</p>
+                            <?php endif; ?>
+                            <div style="position: absolute; bottom: 0; width: 100%; height: 50px; background: linear-gradient(transparent, #fff);"></div>
                         </div>
+                        <a href="<?= base_url('akademik/visimisi') ?>" class="btn btn-outline-primary btn-sm rounded-pill px-4 mt-3 fw-bold">Baca Selengkapnya</a>
                     </div>
+                </div>
+            </div>
+            
+            <div class="content-block">
+                <h4 class="fw-bolder text-dark mb-4 border-bottom pb-3"><i class="fas fa-newspaper text-primary me-2"></i> Cuplikan Berita</h4>
+                <div class="row g-4">
+                    <?php if(isset($berita_terbaru) && count($berita_terbaru) > 0): ?>
+                        <?php foreach(array_slice($berita_terbaru, 0, 4) as $b): ?>
+                        <div class="col-md-6">
+                            <div class="d-flex flex-column h-100 border rounded-4 overflow-hidden shadow-sm" style="transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'" onclick="window.location.href='<?= base_url('berita/detail/' . $b['id_berita']) ?>'">
+                                <img src="<?= base_url('uploads/berita/' . $b['thumbnail']) ?>" alt="News" style="height: 180px; object-fit: cover;">
+                                <div class="p-3 bg-white flex-grow-1">
+                                    <div class="text-muted fs-7 mb-2"><i class="far fa-calendar-alt me-1"></i> <?= date('d M Y', strtotime($b['tanggal_publish'])) ?></div>
+                                    <h6 class="fw-bold text-dark mb-2" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"><?= $b['judul_berita'] ?></h6>
+                                    <p class="text-secondary fs-7 mb-0" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"><?= strip_tags($b['isi_berita']) ?></p>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+                <div class="text-center mt-4">
+                    <a href="<?= base_url('berita') ?>" class="btn btn-light border rounded-pill px-4 fw-bold text-primary">Lihat Semua Berita <i class="fas fa-arrow-right ms-1"></i></a>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="container py-5 mt-5">
-    <div class="text-center mb-5">
-        <h6 class="text-primary fw-bold tracking-wider text-uppercase mb-2">Informasi Publik</h6>
-        <h2 class="fw-bolder text-dark display-6">Berita <span class="gradient-text">Terbaru</span></h2>
-        <div class="mx-auto bg-primary rounded-pill mt-3" style="width: 60px; height: 5px;"></div>
-    </div>
-
-    <div class="row g-4">
-        <?php if(isset($berita) && count($berita) > 0): ?>
-            <?php foreach($berita as $b): ?>
-            <div class="col-lg-4 col-md-6">
-                <div class="news-card h-100 d-flex flex-column">
-                    <div class="news-img-wrap">
-                        <div class="news-date-badge">
-                            <i class="far fa-calendar-alt me-1"></i> <?= date('d M Y', strtotime($b['tanggal_publish'])) ?>
+        <div class="col-lg-4">
+            <div class="widget-box">
+                <div class="widget-title">Berita Terbaru</div>
+                <?php if(isset($berita_terbaru) && count($berita_terbaru) > 0): ?>
+                    <?php foreach($berita_terbaru as $b): ?>
+                    <div class="widget-item">
+                        <img src="<?= base_url('uploads/berita/' . $b['thumbnail']) ?>" class="widget-img shadow-sm" alt="Thumb">
+                        <div class="widget-text">
+                            <a href="<?= base_url('berita/detail/' . $b['id_berita']) ?>" class="text-decoration-none">
+                                <h6><?= word_limiter($b['judul_berita'], 6) ?></h6>
+                            </a>
+                            <div class="widget-date"><i class="far fa-calendar-alt me-1"></i> <?= date('d M Y', strtotime($b['tanggal_publish'])) ?></div>
                         </div>
-                        <img src="<?= base_url('uploads/berita/' . $b['thumbnail']) ?>" class="news-img" alt="Thumbnail">
                     </div>
-                    <div class="p-4 d-flex flex-column flex-grow-1">
-                        <h4 class="fw-bold text-dark mb-3 line-clamp-2"><?= $b['judul_berita'] ?></h4>
-                        <p class="text-secondary line-clamp-3 mb-4 flex-grow-1">
-                            <?= strip_tags($b['isi_berita']) ?>
-                        </p>
-                        <a href="<?= base_url('berita/detail/' . $b['id_berita']) ?>" class="btn btn-light rounded-pill py-2 fw-bold text-primary border text-center hover-scale w-100">
-                            Baca Selengkapnya <i class="fas fa-arrow-right ms-1"></i>
-                        </a>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-muted text-center fs-7">Belum ada berita.</p>
+                <?php endif; ?>
+            </div>
+
+            <div class="widget-box">
+                <div class="widget-title" style="border-color: #e74c3c;">Papan Pengumuman</div>
+                <?php if(isset($pengumuman_terbaru) && count($pengumuman_terbaru) > 0): ?>
+                    <?php foreach($pengumuman_terbaru as $p): ?>
+                    <div class="widget-item align-items-center">
+                        <div class="bg-danger bg-opacity-10 text-danger rounded-3 d-flex align-items-center justify-content-center flex-shrink-0" style="width: 50px; height: 50px;">
+                            <i class="fas fa-bullhorn fs-4"></i>
+                        </div>
+                        <div class="widget-text w-100">
+                            <a href="<?= base_url('pengumuman') ?>" class="text-decoration-none">
+                                <h6><?= word_limiter($p['judul_pengumuman'], 8) ?></h6>
+                            </a>
+                            <div class="widget-date"><i class="far fa-clock me-1"></i> <?= date('d M Y', strtotime($p['created_at'])) ?></div>
+                        </div>
                     </div>
-                </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p class="text-muted text-center fs-7">Belum ada pengumuman.</p>
+                <?php endif; ?>
             </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <div class="col-12 text-center py-5">
-                <div class="bg-light rounded-4 p-5 d-inline-block text-muted">
-                    <i class="fas fa-newspaper fs-1 mb-3 opacity-50 d-block"></i>
-                    <h5 class="fw-bold m-0">Belum ada berita diterbitkan.</h5>
-                </div>
+
+            <div class="widget-box">
+                <div class="widget-title" style="border-color: #10b981;">Arsip Dokumen</div>
+                <?php if(isset($arsip_terbaru) && count($arsip_terbaru) > 0): ?>
+                    <ul class="archive-list">
+                        <?php foreach($arsip_terbaru as $arsip): ?>
+                        <li>
+                            <a href="#">
+                                <span class="text-truncate me-2"><i class="fas fa-file-alt me-2 opacity-50"></i><?= $arsip['perihal'] ?></span>
+                                <span class="badge bg-white text-dark border"><?= date('Y', strtotime($arsip['tanggal_surat'])) ?></span>
+                            </a>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php else: ?>
+                    <p class="text-muted text-center fs-7">Belum ada arsip tersedia.</p>
+                <?php endif; ?>
             </div>
-        <?php endif; ?>
+        </div>
     </div>
-    
-    <?php if(isset($berita) && count($berita) > 0): ?>
-    <div class="text-center mt-5">
-        <a href="<?= base_url('berita') ?>" class="btn btn-glow rounded-pill px-5 py-3 fw-bold fs-6 shadow-lg">Lihat Semua Berita</a>
-    </div>
-    <?php endif; ?>
 </div>
 
 <?= $this->include('frontend/kelulusan_popup') ?>
-
 <?= $this->endSection() ?>
