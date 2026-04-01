@@ -18,7 +18,7 @@ class Dashboard extends BaseController
         $data['total_siswa'] = $id_kelas_wali ? $db->table('siswa')->where('id_kelas', $id_kelas_wali)->countAllResults() : 0;
         $data['total_mapel'] = $db->table('set_mapel_guru')->where('id_guru', $id_guru)->groupBy('id_mapel')->countAllResults();
 
-        $beban = $db->table('beban_kerja')->where('id_guru', $id_guru)->get()->getRow();
+        $beban = $db->table('beban_kerja_guru')->where('id_guru', $id_guru)->get()->getRow();
         $data['total_jam'] = $beban ? $beban->jumlah_jam_kerja : 0;
 
         $data['total_pengumuman'] = $db->table('pengumuman')->where('id_user', $id_user)->countAllResults();
