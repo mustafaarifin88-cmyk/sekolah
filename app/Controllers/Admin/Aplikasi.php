@@ -85,7 +85,7 @@ class Aplikasi extends BaseController
     {
         $model = new IdentitasSekolahModel();
         $data['identitas'] = $model->first();
-        return view('admin/aplikasi/identitas', $data);
+        return view('admin/aplikasi/kepsek', $data);
     }
 
     public function update_kepsek()
@@ -115,7 +115,7 @@ class Aplikasi extends BaseController
         } else {
             $model->insert($data);
         }
-        return redirect()->to(base_url('admin/aplikasi/identitas'))->with('success', 'Data Kepala Sekolah berhasil diperbarui!');
+        return redirect()->to(base_url('admin/aplikasi/kepsek'))->with('success', 'Data Kepala Sekolah berhasil diperbarui!');
     }
 
     public function menu()
