@@ -209,6 +209,24 @@ class Akademik extends BaseController
         return redirect()->to(base_url('admin/akademik/siswa'))->with('success', 'Import Data Siswa berhasil dilakukan.');
     }
 
+    public function naik_kelas()
+    {
+        $id_siswa_array = $this->request->getPost('id_siswa');
+        $id_kelas_tujuan = $this->request->getPost('id_kelas_tujuan');
+
+        if (!empty($id_siswa_array) && !empty($id_kelas_tujuan)) {
+            $db = \Config\Database::connect();
+            $builder = $db->table('siswa');
+            $builder->whereIn('id_siswa', $id_siswa_array);
+            $builder->update(['id_kelas' => $id_kelas_tujuan]);
+
+            $jumlah = count($id_siswa_array);
+            return redirect()->to(base_url('admin/akademik/siswa'))->with('success', "$jumlah Siswa berhasil dipindahkan ke kelas baru.");
+        }
+
+        return redirect()->to(base_url('admin/akademik/siswa'))->with('error', 'Gagal memproses. Pilih siswa dan kelas tujuan terlebih dahulu.');
+    }
+
     public function guru()
     {
         $db = \Config\Database::connect();
