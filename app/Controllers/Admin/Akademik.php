@@ -101,6 +101,7 @@ class Akademik extends BaseController
         $data = [
             'id_kelas' => $id_kelas,
             'nama_siswa' => $this->request->getPost('nama_siswa'),
+            'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
             'nis' => $this->request->getPost('nis'),
             'nisn' => $this->request->getPost('nisn'),
             'tempat_lahir' => $this->request->getPost('tempat_lahir'),
@@ -146,6 +147,7 @@ class Akademik extends BaseController
         $data = [
             'id_kelas' => $id_kelas,
             'nama_siswa' => $this->request->getPost('nama_siswa'),
+            'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
             'nis' => $this->request->getPost('nis'),
             'nisn' => $this->request->getPost('nisn'),
             'tempat_lahir' => $this->request->getPost('tempat_lahir'),
