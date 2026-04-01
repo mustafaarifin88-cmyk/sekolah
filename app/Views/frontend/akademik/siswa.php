@@ -34,7 +34,6 @@
                         <th width="5%" class="text-center bg-light">No</th>
                         <th class="bg-light">Nama Peserta Didik</th>
                         <th class="text-center bg-light">NISN</th>
-                        <th class="text-center bg-light">L/P</th>
                         <th class="text-center bg-light">Kelas</th>
                     </tr>
                 </thead>
@@ -46,17 +45,10 @@
                             <i class="fas fa-user-circle me-2 text-secondary opacity-50"></i><?= $row['nama_siswa'] ?>
                         </td>
                         <td class="text-center text-secondary"><?= substr($row['nisn'], 0, 4) ?>******</td>
-                        <td class="text-center">
-                            <?php if($row['jenis_kelamin'] == 'Laki-Laki'): ?>
-                                <span class="badge bg-primary bg-opacity-10 text-primary px-2 py-1 rounded-pill">L</span>
-                            <?php else: ?>
-                                <span class="badge bg-danger bg-opacity-10 text-danger px-2 py-1 rounded-pill">P</span>
-                            <?php endif; ?>
-                        </td>
                         <td class="text-center"><span class="badge bg-warning text-dark border px-3 py-1 rounded-pill"><?= $row['nama_kelas'] ?? '-' ?></span></td>
                     </tr>
                     <?php endforeach; else: ?>
-                    <tr id="emptyRow"><td colspan="5" class="text-center py-5 text-muted"><i class="fas fa-users-slash fs-1 mb-3 opacity-50 d-block"></i>Data siswa belum tersedia.</td></tr>
+                    <tr id="emptyRow"><td colspan="4" class="text-center py-5 text-muted"><i class="fas fa-users-slash fs-1 mb-3 opacity-50 d-block"></i>Data siswa belum tersedia.</td></tr>
                     <?php endif; ?>
                 </tbody>
             </table>
