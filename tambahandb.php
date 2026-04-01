@@ -1,1 +1,0 @@
-ALTER TABLE `siswa` ADD `jenis_kelamin` VARCHAR(15) NULL DEFAULT NULL AFTER `nama_siswa`;
