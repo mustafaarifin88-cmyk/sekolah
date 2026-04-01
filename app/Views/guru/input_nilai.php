@@ -23,15 +23,15 @@
         <div class="modern-card p-4 mb-4" style="background: var(--theme-gradient);">
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
                 <div class="text-white">
-                    <h4 class="fw-bold mb-1"><i class="fas fa-edit me-2"></i> Input Nilai Rapor Siswa</h4>
-                    <p class="mb-0 opacity-75 fs-7">Kelola nilai akademik siswa untuk mata pelajaran yang Anda ampu.</p>
+                    <h4 class="fw-bold mb-1"><i class="fas fa-edit me-2"></i> Input Nilai Akademik</h4>
+                    <p class="mb-0 opacity-75 fs-7">Input nilai siswa berdasarkan kelas dan mata pelajaran yang Anda ampu.</p>
                 </div>
                 <div class="d-flex gap-2">
                     <button class="btn btn-white text-success rounded-pill px-4 fw-bold shadow-sm hover-lift" data-toggle="modal" data-target="#modalImport">
                         <i class="fas fa-file-excel me-2"></i> Import Nilai
                     </button>
                     <button class="btn btn-white text-danger rounded-pill px-4 fw-bold shadow-sm hover-lift" data-toggle="modal" data-target="#modalTambah">
-                        <i class="fas fa-plus me-2"></i> Input Manual
+                        <i class="fas fa-plus me-2"></i> Input Nilai Manual
                     </button>
                 </div>
             </div>
@@ -43,9 +43,10 @@
                     <thead>
                         <tr>
                             <th width="5%" class="text-center rounded-start">No</th>
-                            <th>ID Siswa & Kelas</th>
-                            <th>Mapel & Periode</th>
-                            <th class="text-center">Nilai Angka</th>
+                            <th>Nama Siswa & Kelas</th>
+                            <th>Mata Pelajaran</th>
+                            <th>Periode</th>
+                            <th class="text-center">Nilai Akhir</th>
                             <th width="15%" class="text-center rounded-end">Aksi</th>
                         </tr>
                     </thead>
@@ -54,23 +55,21 @@
                         <tr>
                             <td class="text-center fw-bold text-muted"><?= $key + 1 ?></td>
                             <td>
-                                <div class="fw-bold text-dark fs-6">ID Siswa: <?= $row['id_siswa'] ?></div>
-                                <span class="badge bg-light text-dark border px-2 py-1 mt-1">ID Kelas: <?= $row['id_kelas'] ?></span>
+                                <div class="fw-bold text-dark fs-6"><?= $row['nama_siswa'] ?></div>
+                                <span class="badge bg-light text-dark border px-2 py-1 mt-1"><i class="fas fa-door-open text-primary me-1"></i> <?= $row['nama_kelas'] ?></span>
                             </td>
-                            <td>
-                                <div class="fw-bold" style="color: var(--theme-color);">ID Mapel: <?= $row['id_mapel'] ?></div>
-                                <span class="text-muted fs-7">SMT <?= $row['semester'] ?> | TA: <?= $row['tahun_ajaran'] ?></span>
-                            </td>
+                            <td><span class="fw-bold" style="color: var(--theme-color);"><?= $row['nama_mapel'] ?></span></td>
+                            <td class="text-secondary fs-7 fw-semibold"><?= $row['tahun_ajaran'] ?><br>Semester <?= $row['semester'] ?></td>
                             <td class="text-center">
                                 <span class="badge <?= $row['nilai'] >= 75 ? 'bg-success' : 'bg-danger' ?> rounded-pill px-4 py-2 fs-5 shadow-sm"><?= $row['nilai'] ?></span>
                             </td>
                             <td class="text-center">
                                 <button class="btn btn-sm btn-light text-primary rounded-circle shadow-sm me-1 hover-lift" data-toggle="modal" data-target="#modalEdit<?= $row['id_nilai'] ?>" style="width:35px; height:35px;"><i class="fas fa-edit"></i></button>
-                                <a href="<?= base_url('guru/akademik/hapus_nilai/' . $row['id_nilai']) ?>" onclick="return confirm('Hapus nilai ini?')" class="btn btn-sm btn-light text-danger rounded-circle shadow-sm d-inline-flex align-items-center justify-content-center hover-lift" style="width:35px; height:35px;"><i class="fas fa-trash"></i></a>
+                                <a href="<?= base_url(session()->get('role').'/akademik/hapus_nilai/' . $row['id_nilai']) ?>" onclick="return confirm('Hapus nilai ini?')" class="btn btn-sm btn-light text-danger rounded-circle shadow-sm d-inline-flex align-items-center justify-content-center hover-lift" style="width:35px; height:35px;"><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
                         <?php endforeach; else: ?>
-                        <tr><td colspan="5" class="text-center py-5 text-muted"><i class="fas fa-file-signature fs-1 mb-3 opacity-50 d-block"></i>Belum ada data nilai diinput.</td></tr>
+                        <tr><td colspan="6" class="text-center py-5 text-muted"><i class="fas fa-file-signature fs-1 mb-3 opacity-50 d-block"></i>Belum ada data nilai yang diinput.</td></tr>
                         <?php endif; ?>
                     </tbody>
                 </table>
@@ -86,20 +85,27 @@
                 <h5 class="modal-title fw-bold text-white"><i class="fas fa-plus-circle me-2"></i> Input Nilai Baru</h5>
                 <button type="button" class="close text-white shadow-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
-            <form action="<?= base_url('guru/akademik/simpan_nilai') ?>" method="post">
+            <form action="<?= base_url(session()->get('role').'/akademik/simpan_nilai') ?>" method="post">
                 <div class="modal-body p-4 bg-white">
                     <div class="row g-4">
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold text-secondary text-uppercase fs-7">ID / Nomor Induk Siswa</label>
-                            <input type="number" class="form-control modern-input" name="id_siswa" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold text-secondary text-uppercase fs-7">ID Kelas</label>
-                            <input type="number" class="form-control modern-input" name="id_kelas" required>
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold text-secondary text-uppercase fs-7">Pilih Tugas Mengajar (Kelas & Mapel)</label>
+                            <select name="tugas_mengajar" class="form-control modern-input" required>
+                                <option value="">-- Pilih Kelas & Mapel --</option>
+                                <?php if(isset($tugas)): foreach($tugas as $t): ?>
+                                    <option value="<?= $t['id_kelas'].'-'.$t['id_mapel'] ?>"><?= $t['nama_kelas'] ?> - <?= $t['nama_mapel'] ?></option>
+                                <?php endforeach; endif; ?>
+                            </select>
                         </div>
                         <div class="col-md-12">
-                            <label class="form-label fw-bold text-secondary text-uppercase fs-7">ID Mata Pelajaran</label>
-                            <input type="number" class="form-control modern-input" name="id_mapel" required>
+                            <label class="form-label fw-bold text-secondary text-uppercase fs-7">Pilih Siswa</label>
+                            <select name="id_siswa" class="form-control modern-input" required>
+                                <option value="">-- Nama Siswa --</option>
+                                <?php if(isset($siswa)): foreach($siswa as $s): ?>
+                                    <option value="<?= $s['id_siswa'] ?>"><?= $s['nama_siswa'] ?> (Kelas ID: <?= $s['id_kelas'] ?>)</option>
+                                <?php endforeach; endif; ?>
+                            </select>
+                            <small class="text-muted mt-2 d-block">Pastikan siswa yang dipilih berada di kelas yang sesuai dengan tugas di atas.</small>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-bold text-secondary text-uppercase fs-7">Tahun Ajaran</label>
@@ -114,7 +120,7 @@
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-bold text-secondary text-uppercase fs-7">Nilai Akhir</label>
-                            <input type="number" step="0.01" class="form-control modern-input fw-bold text-success fs-5" name="nilai" required>
+                            <input type="number" step="0.01" class="form-control modern-input fw-bold text-success fs-5" name="nilai" placeholder="0-100" required>
                         </div>
                     </div>
                 </div>
@@ -135,20 +141,24 @@
                 <h5 class="modal-title fw-bold text-white"><i class="fas fa-edit me-2"></i> Edit Data Nilai</h5>
                 <button type="button" class="close text-white shadow-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
-            <form action="<?= base_url('guru/akademik/update_nilai/' . $row['id_nilai']) ?>" method="post">
+            <form action="<?= base_url(session()->get('role').'/akademik/update_nilai/' . $row['id_nilai']) ?>" method="post">
                 <div class="modal-body p-4 bg-white">
                     <div class="row g-4">
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold text-secondary text-uppercase fs-7">ID / Nomor Induk Siswa</label>
-                            <input type="number" class="form-control modern-input" name="id_siswa" value="<?= $row['id_siswa'] ?>" required>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label fw-bold text-secondary text-uppercase fs-7">ID Kelas</label>
-                            <input type="number" class="form-control modern-input" name="id_kelas" value="<?= $row['id_kelas'] ?>" required>
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold text-secondary text-uppercase fs-7">Pilih Tugas Mengajar (Kelas & Mapel)</label>
+                            <select name="tugas_mengajar" class="form-control modern-input" required>
+                                <?php if(isset($tugas)): foreach($tugas as $t): ?>
+                                    <option value="<?= $t['id_kelas'].'-'.$t['id_mapel'] ?>" <?= ($row['id_kelas'] == $t['id_kelas'] && $row['id_mapel'] == $t['id_mapel']) ? 'selected' : '' ?>><?= $t['nama_kelas'] ?> - <?= $t['nama_mapel'] ?></option>
+                                <?php endforeach; endif; ?>
+                            </select>
                         </div>
                         <div class="col-md-12">
-                            <label class="form-label fw-bold text-secondary text-uppercase fs-7">ID Mata Pelajaran</label>
-                            <input type="number" class="form-control modern-input" name="id_mapel" value="<?= $row['id_mapel'] ?>" required>
+                            <label class="form-label fw-bold text-secondary text-uppercase fs-7">Siswa</label>
+                            <select name="id_siswa" class="form-control modern-input" required>
+                                <?php if(isset($siswa)): foreach($siswa as $s): ?>
+                                    <option value="<?= $s['id_siswa'] ?>" <?= $row['id_siswa'] == $s['id_siswa'] ? 'selected' : '' ?>><?= $s['nama_siswa'] ?></option>
+                                <?php endforeach; endif; ?>
+                            </select>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-bold text-secondary text-uppercase fs-7">Tahun Ajaran</label>
@@ -184,7 +194,7 @@
                 <h5 class="modal-title fw-bold text-white"><i class="fas fa-file-excel me-2"></i> Import Nilai via Excel</h5>
                 <button type="button" class="close text-white shadow-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
-            <form action="<?= base_url('guru/akademik/import_nilai') ?>" method="post" enctype="multipart/form-data">
+            <form action="<?= base_url(session()->get('role').'/akademik/import_nilai') ?>" method="post" enctype="multipart/form-data">
                 <div class="modal-body p-4 bg-white text-center">
                     <i class="fas fa-cloud-upload-alt text-success" style="font-size: 4rem; margin-bottom: 15px;"></i>
                     <h6 class="fw-bold mb-3">Pilih File Excel (.xlsx)</h6>
