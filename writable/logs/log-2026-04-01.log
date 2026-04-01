@@ -749,3 +749,294 @@ DEBUG - 2026-04-01 11:20:46 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2026-04-01 11:20:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2026-04-01 11:24:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2026-04-01 11:24:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-04-01 11:36:10 --> Table 'sekolah.barang_inventaris' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', [], false)
+ 5 APPPATH\Controllers\Frontend.php(124): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->fasilitas()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 11:36:10 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'sekolah.barang_inventaris' doesn't exist
+[Method: GET, Route: sarpras/fasilitas]
+in SYSTEMPATH\Database\BaseConnection.php on line 724.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', [], false)
+ 2 APPPATH\Controllers\Frontend.php(124): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->fasilitas()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 11:36:10 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'sekolah.barang_inventaris' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', [], false)
+ 4 APPPATH\Controllers\Frontend.php(124): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->fasilitas()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 11:36:10 --> [Caused by] mysqli_sql_exception: Table 'sekolah.barang_inventaris' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', [], false)
+ 5 APPPATH\Controllers\Frontend.php(124): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->fasilitas()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-04-01 11:36:23 --> Table 'sekolah.barang_inventaris' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', [], false)
+ 5 APPPATH\Controllers\Frontend.php(124): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->fasilitas()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 11:36:23 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'sekolah.barang_inventaris' doesn't exist
+[Method: GET, Route: sarpras/fasilitas]
+in SYSTEMPATH\Database\BaseConnection.php on line 724.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', [], false)
+ 2 APPPATH\Controllers\Frontend.php(124): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->fasilitas()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 11:36:23 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'sekolah.barang_inventaris' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', [], false)
+ 4 APPPATH\Controllers\Frontend.php(124): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->fasilitas()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 11:36:23 --> [Caused by] mysqli_sql_exception: Table 'sekolah.barang_inventaris' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', [], false)
+ 5 APPPATH\Controllers\Frontend.php(124): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->fasilitas()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-04-01 11:36:54 --> Table 'sekolah.barang_inventaris' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', [], false)
+ 5 APPPATH\Controllers\Frontend.php(124): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->fasilitas()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 11:36:54 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'sekolah.barang_inventaris' doesn't exist
+[Method: GET, Route: sarpras/fasilitas]
+in SYSTEMPATH\Database\BaseConnection.php on line 724.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', [], false)
+ 2 APPPATH\Controllers\Frontend.php(124): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->fasilitas()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 11:36:54 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'sekolah.barang_inventaris' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', [], false)
+ 4 APPPATH\Controllers\Frontend.php(124): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->fasilitas()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 11:36:54 --> [Caused by] mysqli_sql_exception: Table 'sekolah.barang_inventaris' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `barang_inventaris`.`nama_barang`, `ruang`.`nama_ruang`, `kondisi_barang`.`nama_kondisi`
+FROM `barang_inventaris`
+LEFT JOIN `ruang` ON `ruang`.`id_ruang` = `barang_inventaris`.`id_ruang`
+LEFT JOIN `kondisi_barang` ON `kondisi_barang`.`id_kondisi` = `barang_inventaris`.`id_kondisi`
+ORDER BY `ruang`.`nama_ruang` ASC', [], false)
+ 5 APPPATH\Controllers\Frontend.php(124): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->fasilitas()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

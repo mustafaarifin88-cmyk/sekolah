@@ -114,10 +114,10 @@ class Frontend extends BaseController
         $ruangModel = new RuangModel();
         $db = \Config\Database::connect();
         
-        $builder = $db->table('barang_inventaris');
-        $builder->select('barang_inventaris.nama_barang, ruang.nama_ruang, kondisi_barang.nama_kondisi');
-        $builder->join('ruang', 'ruang.id_ruang = barang_inventaris.id_ruang', 'left');
-        $builder->join('kondisi_barang', 'kondisi_barang.id_kondisi = barang_inventaris.id_kondisi', 'left');
+        $builder = $db->table('barang');
+        $builder->select('barang.nama_barang, ruang.nama_ruang, kondisi.nama_kondisi');
+        $builder->join('ruang', 'ruang.id_ruang = barang.id_ruang', 'left');
+        $builder->join('kondisi', 'kondisi.id_kondisi = barang.id_kondisi', 'left');
         $builder->orderBy('ruang.nama_ruang', 'ASC');
         
         $data['ruang'] = $ruangModel->findAll();
