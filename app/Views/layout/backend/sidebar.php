@@ -10,6 +10,16 @@ $identitasModel = new \App\Models\IdentitasSekolahModel();
 $identitas = $identitasModel->first();
 $logoSidebar = ($identitas && !empty($identitas['logo_sekolah'])) ? base_url('uploads/identitas/' . $identitas['logo_sekolah']) : base_url('assets/dist/img/AdminLTELogo.png');
 $namaSidebar = ($identitas && !empty($identitas['nama_sekolah'])) ? $identitas['nama_sekolah'] : 'SIS PANEL';
+
+// Logic untuk mengambil nama asli user
+$namaUser = session()->get('username');
+if ($role == 'guru' || $role == 'walikelas') {
+    $guruDb = \Config\Database::connect()->table('guru_tendik')->where('id_guru', session()->get('id_relasi'))->get()->getRow();
+    if($guruDb) $namaUser = $guruDb->gelar_depan . ' ' . $guruDb->nama_lengkap . ' ' . $guruDb->gelar_belakang;
+} elseif ($role == 'siswa') {
+    $siswaDb = \Config\Database::connect()->table('siswa')->where('id_siswa', session()->get('id_relasi'))->get()->getRow();
+    if($siswaDb) $namaUser = $siswaDb->nama_siswa;
+}
 ?>
 
 <style>
@@ -119,7 +129,7 @@ $namaSidebar = ($identitas && !empty($identitas['nama_sekolah'])) ? $identitas['
                 <img src="<?= base_url('uploads/profil/' . (session()->get('foto') ?? 'default.png')) ?>" class="img-circle elevation-2 bg-white" alt="User Image" style="width: 40px; height: 40px; object-fit: cover;">
             </div>
             <div class="info ms-2 w-100 text-truncate">
-                <a href="<?= base_url($role . '/profil') ?>" class="d-block text-white fw-bold fs-6 mb-0"><?= session()->get('username') ?></a>
+                <a href="<?= base_url($role . '/profil') ?>" class="d-block text-white fw-bold fs-6 mb-0" title="<?= $namaUser ?>"><?= $namaUser ?></a>
                 <span class="badge bg-indigo rounded-pill text-xs fw-semibold px-2 mt-1" style="background: rgba(99, 102, 241, 0.2) !important; color: #a5b4fc !important; border: 1px solid rgba(99, 102, 241, 0.3);"><?= strtoupper($role) ?></span>
             </div>
         </div>
@@ -148,7 +158,7 @@ $namaSidebar = ($identitas && !empty($identitas['nama_sekolah'])) ? $identitas['
                         <li class="nav-item"><a href="<?= base_url('admin/aplikasi/menu') ?>" class="nav-link <?= ($seg3 == 'menu') ? 'active' : '' ?>"><p>Menu Eksternal</p></a></li>
                         <li class="nav-item"><a href="<?= base_url('admin/aplikasi/tema') ?>" class="nav-link <?= ($seg3 == 'tema') ? 'active' : '' ?>"><p>Tema Website</p></a></li>
                         <li class="nav-item"><a href="<?= base_url('admin/aplikasi/visimisi') ?>" class="nav-link <?= ($seg3 == 'visimisi') ? 'active' : '' ?>"><p>Visi & Misi</p></a></li>
-                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/set_mapel') ?>" class="nav-link <?= ($seg3 == 'set_mapel') ? 'active' : '' ?>"><p>Tugas Mapel Guru</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('admin/aplikasi/set_mapel') ?>" class="nav-link <?= ($seg3 == 'set_mapel') ? 'active' : '' ?>"><p>Tugas & Jadwal Guru</p></a></li>
                         <li class="nav-item"><a href="<?= base_url('admin/aplikasi/set_kelas') ?>" class="nav-link <?= ($seg3 == 'set_kelas') ? 'active' : '' ?>"><p>Tugas Wali Kelas</p></a></li>
                         <li class="nav-item"><a href="<?= base_url('admin/aplikasi/slider') ?>" class="nav-link <?= ($seg3 == 'slider') ? 'active' : '' ?>"><p>Slide Show (Banner)</p></a></li>
                     </ul>
@@ -281,7 +291,8 @@ $namaSidebar = ($identitas && !empty($identitas['nama_sekolah'])) ? $identitas['
                         <p>Data Akademik <i class="right fas fa-angle-left"></i></p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item"><a href="<?= base_url('guru/akademik/siswa_ajar') ?>" class="nav-link <?= ($seg3 == 'siswa_ajar') ? 'active' : '' ?>"><p>Data Siswa Diajar</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('guru/akademik/jadwal') ?>" class="nav-link <?= ($seg3 == 'jadwal') ? 'active' : '' ?>"><p>Jadwal Mengajar</p></a></li>
+                        <li class="nav-item"><a href="<?= base_url('guru/akademik/data_kelas') ?>" class="nav-link <?= ($seg3 == 'data_kelas' || $seg3 == 'data_siswa') ? 'active' : '' ?>"><p>Daftar Kelas & Siswa</p></a></li>
                         <li class="nav-item"><a href="<?= base_url('guru/akademik/input_nilai') ?>" class="nav-link <?= ($seg3 == 'input_nilai') ? 'active' : '' ?>"><p>Input Nilai Rapor</p></a></li>
                     </ul>
                 </li>
