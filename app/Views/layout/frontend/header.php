@@ -143,22 +143,22 @@ elseif($tema == 'theme-animated') $gradienBottom = 'linear-gradient(-45deg, #4e5
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-building me-1"></i> Sarana & Prasarana</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-boxes me-2 text-success"></i> Inventaris & Ruangan</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('sarpras/fasilitas') ?>"><i class="fas fa-boxes me-2 text-success"></i> Inventaris & Ruangan</a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-chart-pie me-1"></i> Transparansi</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-hand-holding-usd me-2 text-success"></i> Penerimaan Dana BOS</a></li>
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-file-invoice-dollar me-2 text-danger"></i> Laporan Pengeluaran</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('transparansi/bos') ?>"><i class="fas fa-hand-holding-usd me-2 text-success"></i> Penerimaan Dana BOS</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('transparansi/pengeluaran') ?>"><i class="fas fa-file-invoice-dollar me-2 text-danger"></i> Laporan Pengeluaran</a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fas fa-folder-open me-1"></i> Arsip Digital</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#"><i class="fas fa-envelope-open-text me-2 text-primary"></i> Arsip Dokumen</a></li>
+                        <li><a class="dropdown-item" href="<?= base_url('arsip/dokumen') ?>"><i class="fas fa-file-alt me-2 text-primary"></i> Arsip Dokumen Publik</a></li>
                     </ul>
                 </li>
             </ul>

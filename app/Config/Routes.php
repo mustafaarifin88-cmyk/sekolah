@@ -17,6 +17,19 @@ $routes->group('akademik', static function ($routes) {
     $routes->get('prestasi', 'Frontend::prestasi');
 });
 
+$routes->group('sarpras', static function ($routes) {
+    $routes->get('fasilitas', 'Frontend::fasilitas');
+});
+
+$routes->group('transparansi', static function ($routes) {
+    $routes->get('bos', 'Frontend::bos');
+    $routes->get('pengeluaran', 'Frontend::pengeluaran');
+});
+
+$routes->group('arsip', static function ($routes) {
+    $routes->get('dokumen', 'Frontend::dokumen');
+});
+
 $routes->get('login', 'Auth::index');
 $routes->post('login/proses', 'Auth::proses');
 $routes->get('logout', 'Auth::logout');
