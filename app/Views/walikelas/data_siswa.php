@@ -43,6 +43,7 @@
                         <tr>
                             <th width="5%" class="text-center">No</th>
                             <th>Identitas Lengkap Siswa</th>
+                            <th class="text-center">L/P</th>
                             <th class="text-center">Asal Kelas</th>
                             <th>Informasi Orang Tua / Wali</th>
                         </tr>
@@ -55,6 +56,9 @@
                                 <div class="fw-bold text-dark fs-6"><?= $row['nama_siswa'] ?></div>
                                 <span class="text-muted fs-7">NIS: <?= $row['nis'] ?> | NISN: <?= $row['nisn'] ?></span>
                             </td>
+                            <td class="text-center">
+                                <span class="badge <?= $row['jenis_kelamin'] == 'Laki-Laki' ? 'bg-primary text-primary' : 'bg-danger text-danger' ?> bg-opacity-10 px-2 py-1 rounded-pill"><?= $row['jenis_kelamin'] == 'Laki-Laki' ? 'L' : 'P' ?></span>
+                            </td>
                             <td class="text-center"><span class="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill fs-6"><?= $row['nama_kelas'] ?? 'N/A' ?></span></td>
                             <td class="text-secondary">
                                 <div class="fw-semibold text-dark"><i class="fas fa-user-friends text-primary me-2"></i> <?= $row['nama_orang_tua'] ?></div>
@@ -62,7 +66,7 @@
                             </td>
                         </tr>
                         <?php endforeach; else: ?>
-                        <tr id="emptyRow"><td colspan="4" class="text-center py-5 text-muted"><i class="fas fa-user-graduate fs-1 mb-3 opacity-50 d-block"></i>Tidak ada siswa di kelas ini.</td></tr>
+                        <tr id="emptyRow"><td colspan="5" class="text-center py-5 text-muted"><i class="fas fa-user-graduate fs-1 mb-3 opacity-50 d-block"></i>Tidak ada siswa di kelas ini.</td></tr>
                         <?php endif; ?>
                     </tbody>
                 </table>
