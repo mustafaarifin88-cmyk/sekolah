@@ -58,7 +58,7 @@
             <div class="row align-items-center position-relative" style="z-index: 2;">
                 <div class="col-md-8">
                     <span class="badge bg-white text-success rounded-pill px-3 py-2 mb-3 shadow-sm fw-bold">PANEL WALI KELAS</span>
-                    <h1 class="fw-bolder mb-2" style="font-size: 2.5rem;">Selamat Datang, <?= session()->get('username') ?>!</h1>
+                    <h1 class="fw-bolder mb-2" style="font-size: 2.5rem;">Selamat Datang, <?= $nama_lengkap_guru ?>!</h1>
                     <p class="fs-5 opacity-75 mb-0">Pantau dan bimbing siswa kelas Anda untuk meraih prestasi terbaik.</p>
                 </div>
             </div>
@@ -72,7 +72,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <p class="text-muted fw-bold text-uppercase fs-7 mb-1">Siswa di Kelas</p>
-                    <h3 class="fw-black text-dark m-0">36</h3>
+                    <h3 class="fw-black text-dark m-0"><?= $total_siswa ?></h3>
                 </div>
                 <div class="icon-wrapper bg-primary bg-opacity-10 text-primary"><i class="fas fa-users"></i></div>
             </div>
@@ -83,7 +83,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <p class="text-muted fw-bold text-uppercase fs-7 mb-1">Mapel Diajar</p>
-                    <h3 class="fw-black text-dark m-0">3</h3>
+                    <h3 class="fw-black text-dark m-0"><?= $total_mapel ?></h3>
                 </div>
                 <div class="icon-wrapper bg-danger bg-opacity-10 text-danger"><i class="fas fa-book"></i></div>
             </div>
@@ -94,7 +94,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <p class="text-muted fw-bold text-uppercase fs-7 mb-1">Total Jam/Mgg</p>
-                    <h3 class="fw-black text-dark m-0">24</h3>
+                    <h3 class="fw-black text-dark m-0"><?= $total_jam ?></h3>
                 </div>
                 <div class="icon-wrapper bg-warning bg-opacity-10 text-warning"><i class="fas fa-clock"></i></div>
             </div>
@@ -104,8 +104,8 @@
         <div class="stat-card p-4">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <p class="text-muted fw-bold text-uppercase fs-7 mb-1">Berita/Info</p>
-                    <h3 class="fw-black text-dark m-0">5</h3>
+                    <p class="text-muted fw-bold text-uppercase fs-7 mb-1">Pengumuman</p>
+                    <h3 class="fw-black text-dark m-0"><?= $total_pengumuman ?></h3>
                 </div>
                 <div class="icon-wrapper bg-success bg-opacity-10 text-success"><i class="fas fa-bullhorn"></i></div>
             </div>
