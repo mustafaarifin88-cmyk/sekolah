@@ -24,20 +24,20 @@
             <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
                 <div class="text-white">
                     <h4 class="fw-bold mb-1"><i class="fas fa-edit me-2"></i> Input Nilai Akademik</h4>
-                    <p class="mb-0 opacity-75 fs-7">Input nilai siswa berdasarkan kelas dan mata pelajaran yang Anda ampu.</p>
+                    <p class="mb-0 opacity-75 fs-7">Pilih Kelas lalu Mata Pelajaran untuk mulai menginput nilai.</p>
                 </div>
                 <div class="d-flex gap-2">
                     <button class="btn btn-white text-success rounded-pill px-4 fw-bold shadow-sm hover-lift" data-toggle="modal" data-target="#modalImport">
                         <i class="fas fa-file-excel me-2"></i> Import Nilai
                     </button>
                     <button class="btn btn-white text-danger rounded-pill px-4 fw-bold shadow-sm hover-lift" data-toggle="modal" data-target="#modalTambah">
-                        <i class="fas fa-plus me-2"></i> Input Nilai Manual
+                        <i class="fas fa-plus me-2"></i> Input Manual
                     </button>
                 </div>
             </div>
         </div>
 
-        <div class="modern-card p-0 overflow-hidden">
+        <div class="modern-card p-0 overflow-hidden border">
             <div class="table-responsive">
                 <table class="table table-hover table-modern mb-0">
                     <thead>
@@ -78,6 +78,7 @@
     </div>
 </div>
 
+<!-- Modal Tambah Nilai Dikelompokkan Berdasarkan Kelas -->
 <div class="modal fade" id="modalTambah" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -89,23 +90,49 @@
                 <div class="modal-body p-4 bg-white">
                     <div class="row g-4">
                         <div class="col-md-12">
-                            <label class="form-label fw-bold text-secondary text-uppercase fs-7">Pilih Tugas Mengajar (Kelas & Mapel)</label>
+                            <label class="form-label fw-bold text-secondary text-uppercase fs-7">Pilih Tugas Mengajar (Kelas -> Mapel)</label>
                             <select name="tugas_mengajar" class="form-control modern-input" required>
                                 <option value="">-- Pilih Kelas & Mapel --</option>
-                                <?php if(isset($tugas)): foreach($tugas as $t): ?>
-                                    <option value="<?= $t['id_kelas'].'-'.$t['id_mapel'] ?>"><?= $t['nama_kelas'] ?> - <?= $t['nama_mapel'] ?></option>
-                                <?php endforeach; endif; ?>
+                                <?php 
+                                if(isset($tugas)): 
+                                    $currentKelas = '';
+                                    foreach($tugas as $t): 
+                                        if($currentKelas !== $t['nama_kelas']) {
+                                            if($currentKelas !== '') echo '</optgroup>';
+                                            echo '<optgroup label="Kelas ' . $t['nama_kelas'] . '">';
+                                            $currentKelas = $t['nama_kelas'];
+                                        }
+                                ?>
+                                    <option value="<?= $t['id_kelas'].'-'.$t['id_mapel'] ?>">Mata Pelajaran: <?= $t['nama_mapel'] ?></option>
+                                <?php 
+                                    endforeach; 
+                                    if($currentKelas !== '') echo '</optgroup>';
+                                endif; 
+                                ?>
                             </select>
                         </div>
                         <div class="col-md-12">
                             <label class="form-label fw-bold text-secondary text-uppercase fs-7">Pilih Siswa</label>
                             <select name="id_siswa" class="form-control modern-input" required>
                                 <option value="">-- Nama Siswa --</option>
-                                <?php if(isset($siswa)): foreach($siswa as $s): ?>
-                                    <option value="<?= $s['id_siswa'] ?>"><?= $s['nama_siswa'] ?> (Kelas ID: <?= $s['id_kelas'] ?>)</option>
-                                <?php endforeach; endif; ?>
+                                <?php 
+                                if(isset($siswa)): 
+                                    $currentKelasSiswa = '';
+                                    foreach($siswa as $s): 
+                                        $kelasNama = 'Kelas ID: ' . $s['id_kelas'];
+                                        if($currentKelasSiswa !== $kelasNama) {
+                                            if($currentKelasSiswa !== '') echo '</optgroup>';
+                                            echo '<optgroup label="' . $kelasNama . '">';
+                                            $currentKelasSiswa = $kelasNama;
+                                        }
+                                ?>
+                                    <option value="<?= $s['id_siswa'] ?>"><?= $s['nama_siswa'] ?></option>
+                                <?php 
+                                    endforeach; 
+                                    if($currentKelasSiswa !== '') echo '</optgroup>';
+                                endif; 
+                                ?>
                             </select>
-                            <small class="text-muted mt-2 d-block">Pastikan siswa yang dipilih berada di kelas yang sesuai dengan tugas di atas.</small>
                         </div>
                         <div class="col-md-4">
                             <label class="form-label fw-bold text-secondary text-uppercase fs-7">Tahun Ajaran</label>
@@ -125,8 +152,8 @@
                     </div>
                 </div>
                 <div class="modal-footer border-0 p-4 pt-0 bg-white">
-                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-secondary shadow-sm hover-lift border" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn text-white rounded-pill px-5 fw-bold shadow-sm hover-lift border-0" style="background: var(--theme-gradient);"><i class="fas fa-save me-2"></i> Simpan Nilai</button>
+                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-secondary shadow-sm border" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn text-white rounded-pill px-5 fw-bold shadow-sm border-0" style="background: var(--theme-gradient);"><i class="fas fa-save me-2"></i> Simpan Nilai</button>
                 </div>
             </form>
         </div>
@@ -145,11 +172,25 @@
                 <div class="modal-body p-4 bg-white">
                     <div class="row g-4">
                         <div class="col-md-12">
-                            <label class="form-label fw-bold text-secondary text-uppercase fs-7">Pilih Tugas Mengajar (Kelas & Mapel)</label>
+                            <label class="form-label fw-bold text-secondary text-uppercase fs-7">Tugas Mengajar (Kelas -> Mapel)</label>
                             <select name="tugas_mengajar" class="form-control modern-input" required>
-                                <?php if(isset($tugas)): foreach($tugas as $t): ?>
-                                    <option value="<?= $t['id_kelas'].'-'.$t['id_mapel'] ?>" <?= ($row['id_kelas'] == $t['id_kelas'] && $row['id_mapel'] == $t['id_mapel']) ? 'selected' : '' ?>><?= $t['nama_kelas'] ?> - <?= $t['nama_mapel'] ?></option>
-                                <?php endforeach; endif; ?>
+                                <?php 
+                                if(isset($tugas)): 
+                                    $currentKelas = '';
+                                    foreach($tugas as $t): 
+                                        if($currentKelas !== $t['nama_kelas']) {
+                                            if($currentKelas !== '') echo '</optgroup>';
+                                            echo '<optgroup label="Kelas ' . $t['nama_kelas'] . '">';
+                                            $currentKelas = $t['nama_kelas'];
+                                        }
+                                        $selected = ($row['id_kelas'] == $t['id_kelas'] && $row['id_mapel'] == $t['id_mapel']) ? 'selected' : '';
+                                ?>
+                                    <option value="<?= $t['id_kelas'].'-'.$t['id_mapel'] ?>" <?= $selected ?>>Mata Pelajaran: <?= $t['nama_mapel'] ?></option>
+                                <?php 
+                                    endforeach; 
+                                    if($currentKelas !== '') echo '</optgroup>';
+                                endif; 
+                                ?>
                             </select>
                         </div>
                         <div class="col-md-12">
@@ -178,8 +219,8 @@
                     </div>
                 </div>
                 <div class="modal-footer border-0 p-4 pt-0 bg-white">
-                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-secondary shadow-sm hover-lift border" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn text-white rounded-pill px-5 fw-bold shadow-sm hover-lift border-0" style="background: var(--theme-gradient);"><i class="fas fa-save me-2"></i> Simpan Perubahan</button>
+                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-secondary border shadow-sm hover-lift" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn text-white rounded-pill px-5 fw-bold shadow-sm border-0 hover-lift" style="background: var(--theme-gradient);"><i class="fas fa-save me-2"></i> Update Nilai</button>
                 </div>
             </form>
         </div>
@@ -190,7 +231,7 @@
 <div class="modal fade" id="modalImport" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header p-4" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+            <div class="modal-header p-4" style="background: var(--theme-gradient);">
                 <h5 class="modal-title fw-bold text-white"><i class="fas fa-file-excel me-2"></i> Import Nilai via Excel</h5>
                 <button type="button" class="close text-white shadow-none" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
@@ -199,11 +240,11 @@
                     <i class="fas fa-cloud-upload-alt text-success" style="font-size: 4rem; margin-bottom: 15px;"></i>
                     <h6 class="fw-bold mb-3">Pilih File Excel (.xlsx)</h6>
                     <input type="file" class="form-control modern-input" name="file_excel" accept=".xlsx, .xls" required>
-                    <a href="#" class="d-block mt-3 text-decoration-none fw-semibold"><i class="fas fa-download me-1"></i> Download Template</a>
+                    <a href="#" class="d-block mt-3 text-decoration-none fw-semibold text-danger"><i class="fas fa-download me-1"></i> Download Template Kosong</a>
                 </div>
                 <div class="modal-footer border-0 p-4 pt-0 bg-white">
-                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-secondary shadow-sm hover-lift border" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn text-white rounded-pill px-5 fw-bold shadow-sm hover-lift border-0" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);"><i class="fas fa-upload me-2"></i> Import</button>
+                    <button type="button" class="btn btn-light rounded-pill px-4 fw-bold text-secondary border shadow-sm hover-lift" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn text-white rounded-pill px-5 fw-bold shadow-sm border-0 hover-lift" style="background: var(--theme-gradient);"><i class="fas fa-upload me-2"></i> Mulai Import</button>
                 </div>
             </form>
         </div>
