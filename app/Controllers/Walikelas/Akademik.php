@@ -27,7 +27,7 @@ class Akademik extends BaseController
         $db = \Config\Database::connect();
         $id_guru = session()->get('id_relasi');
         
-        $wali = $db->table('set_kelas_wali')->where('id_guru', $id_guru)->first();
+        $wali = $db->table('set_kelas_wali')->where('id_guru', $id_guru)->get()->getRow();
         $id_kelas_wali = $wali ? $wali->id_kelas : null;
         
         if($id_kelas_wali){
@@ -48,7 +48,7 @@ class Akademik extends BaseController
         $db = \Config\Database::connect();
         $id_guru = session()->get('id_relasi');
         
-        $wali = $db->table('set_kelas_wali')->where('id_guru', $id_guru)->first();
+        $wali = $db->table('set_kelas_wali')->where('id_guru', $id_guru)->get()->getRow();
         $id_kelas_wali = $wali ? $wali->id_kelas : null;
 
         if($id_kelas_wali){
@@ -147,7 +147,7 @@ class Akademik extends BaseController
     {
         $db = \Config\Database::connect();
         $id_guru = session()->get('id_relasi');
-        $wali = $db->table('set_kelas_wali')->where('id_guru', $id_guru)->first();
+        $wali = $db->table('set_kelas_wali')->where('id_guru', $id_guru)->get()->getRow();
         $id_kelas_wali = $wali ? $wali->id_kelas : null;
 
         if($id_kelas_wali){
@@ -169,7 +169,7 @@ class Akademik extends BaseController
     {
         $db = \Config\Database::connect();
         $id_guru = session()->get('id_relasi');
-        $wali = $db->table('set_kelas_wali')->where('id_guru', $id_guru)->first();
+        $wali = $db->table('set_kelas_wali')->where('id_guru', $id_guru)->get()->getRow();
         $id_kelas_wali = $wali ? $wali->id_kelas : null;
 
         if($id_kelas_wali){
