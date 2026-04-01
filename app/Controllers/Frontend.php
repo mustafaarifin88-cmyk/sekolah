@@ -14,6 +14,10 @@ use App\Models\KurikulumModel;
 use App\Models\KelasModel;
 use App\Models\GuruModel;
 use App\Models\PrestasiModel;
+use App\Models\RuangModel;
+use App\Models\BarangModel;
+use App\Models\KeuanganBosModel;
+use App\Models\PengeluaranModel;
 
 class Frontend extends BaseController
 {
@@ -103,6 +107,43 @@ class Frontend extends BaseController
         $model = new PrestasiModel();
         $data['prestasi'] = $model->findAll();
         return view('frontend/akademik/prestasi', $data);
+    }
+
+    public function fasilitas()
+    {
+        $ruangModel = new RuangModel();
+        $db = \Config\Database::connect();
+        
+        $builder = $db->table('barang_inventaris');
+        $builder->select('barang_inventaris.nama_barang, ruang.nama_ruang, kondisi_barang.nama_kondisi');
+        $builder->join('ruang', 'ruang.id_ruang = barang_inventaris.id_ruang', 'left');
+        $builder->join('kondisi_barang', 'kondisi_barang.id_kondisi = barang_inventaris.id_kondisi', 'left');
+        $builder->orderBy('ruang.nama_ruang', 'ASC');
+        
+        $data['ruang'] = $ruangModel->findAll();
+        $data['barang'] = $builder->get()->getResultArray();
+        return view('frontend/sarpras/fasilitas', $data);
+    }
+
+    public function bos()
+    {
+        $model = new KeuanganBosModel();
+        $data['bos'] = $model->orderBy('tanggal_terima', 'DESC')->findAll();
+        return view('frontend/transparansi/bos', $data);
+    }
+
+    public function pengeluaran()
+    {
+        $model = new PengeluaranModel();
+        $data['pengeluaran'] = $model->orderBy('tanggal', 'DESC')->findAll();
+        return view('frontend/transparansi/pengeluaran', $data);
+    }
+
+    public function dokumen()
+    {
+        $model = new SuratKeluarModel();
+        $data['dokumen'] = $model->orderBy('tanggal_surat', 'DESC')->findAll();
+        return view('frontend/arsip/dokumen', $data);
     }
 
     public function cek_kelulusan()
