@@ -44,6 +44,7 @@
                         <tr>
                             <th width="5%" class="text-center rounded-start">No</th>
                             <th>Info Siswa</th>
+                            <th class="text-center">L/P</th>
                             <th>Akun Login</th>
                             <th>Kelas</th>
                             <th>TTL</th>
@@ -59,6 +60,9 @@
                                 <div class="fw-bold text-dark fs-6"><?= $row['nama_siswa'] ?></div>
                                 <span class="text-muted fs-7">NIS: <?= $row['nis'] ?> | NISN: <?= $row['nisn'] ?></span>
                             </td>
+                            <td class="text-center">
+                                <span class="badge <?= $row['jenis_kelamin'] == 'Laki-Laki' ? 'bg-primary text-primary' : 'bg-danger text-danger' ?> bg-opacity-10 px-2 py-1 rounded-pill"><?= $row['jenis_kelamin'] == 'Laki-Laki' ? 'L' : 'P' ?></span>
+                            </td>
                             <td>
                                 <span class="fw-semibold text-primary"><i class="fas fa-user-circle me-1"></i> <?= $row['username'] ?? '<em class="text-muted fs-7">Belum dibuat</em>' ?></span>
                             </td>
@@ -71,7 +75,7 @@
                             </td>
                         </tr>
                         <?php endforeach; else: ?>
-                        <tr><td colspan="7" class="text-center py-5 text-muted"><i class="fas fa-users fs-1 mb-3 opacity-50 d-block"></i>Belum ada data siswa terdaftar.</td></tr>
+                        <tr><td colspan="8" class="text-center py-5 text-muted"><i class="fas fa-users fs-1 mb-3 opacity-50 d-block"></i>Belum ada data siswa terdaftar.</td></tr>
                         <?php endif; ?>
                     </tbody>
                 </table>
@@ -109,7 +113,7 @@
                         <div class="col-md-12 mt-4">
                             <h6 class="fw-bold text-primary border-bottom pb-2 mb-3"><i class="fas fa-address-card me-2"></i>Data Diri & Akademik</h6>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="mb-3">
                                 <label class="form-label fw-bold text-secondary text-uppercase fs-7">Nama Lengkap</label>
                                 <input type="text" class="form-control modern-input" name="nama_siswa" required>
@@ -117,11 +121,21 @@
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary text-uppercase fs-7">Jenis Kelamin</label>
+                                <select class="form-control modern-input" name="jenis_kelamin" required>
+                                    <option value="">-- Pilih --</option>
+                                    <option value="Laki-Laki">Laki-Laki</option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="mb-3">
                                 <label class="form-label fw-bold text-secondary text-uppercase fs-7">NIS</label>
                                 <input type="text" class="form-control modern-input" name="nis" required>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="mb-3">
                                 <label class="form-label fw-bold text-secondary text-uppercase fs-7">NISN</label>
                                 <input type="text" class="form-control modern-input" name="nisn" required>
@@ -277,7 +291,7 @@
                         <div class="col-md-12 mt-4">
                             <h6 class="fw-bold text-primary border-bottom pb-2 mb-3"><i class="fas fa-address-card me-2"></i>Data Diri & Akademik</h6>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             <div class="mb-3">
                                 <label class="form-label fw-bold text-secondary text-uppercase fs-7">Nama Lengkap</label>
                                 <input type="text" class="form-control modern-input" name="nama_siswa" value="<?= $row['nama_siswa'] ?>" required>
@@ -285,11 +299,20 @@
                         </div>
                         <div class="col-md-3">
                             <div class="mb-3">
+                                <label class="form-label fw-bold text-secondary text-uppercase fs-7">Jenis Kelamin</label>
+                                <select class="form-control modern-input" name="jenis_kelamin" required>
+                                    <option value="Laki-Laki" <?= $row['jenis_kelamin'] == 'Laki-Laki' ? 'selected' : '' ?>>Laki-Laki</option>
+                                    <option value="Perempuan" <?= $row['jenis_kelamin'] == 'Perempuan' ? 'selected' : '' ?>>Perempuan</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="mb-3">
                                 <label class="form-label fw-bold text-secondary text-uppercase fs-7">NIS</label>
                                 <input type="text" class="form-control modern-input" name="nis" value="<?= $row['nis'] ?>" required>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="mb-3">
                                 <label class="form-label fw-bold text-secondary text-uppercase fs-7">NISN</label>
                                 <input type="text" class="form-control modern-input" name="nisn" value="<?= $row['nisn'] ?>" required>
