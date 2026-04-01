@@ -8,6 +8,15 @@ $routes->get('berita/detail/(:num)', 'Frontend::detail_berita/$1');
 $routes->get('pengumuman', 'Frontend::pengumuman');
 $routes->post('cek_kelulusan', 'Frontend::cek_kelulusan');
 
+$routes->group('akademik', static function ($routes) {
+    $routes->get('kurikulum', 'Frontend::kurikulum');
+    $routes->get('kelas', 'Frontend::kelas');
+    $routes->get('siswa', 'Frontend::siswa');
+    $routes->get('guru', 'Frontend::guru');
+    $routes->get('visimisi', 'Frontend::visimisi');
+    $routes->get('prestasi', 'Frontend::prestasi');
+});
+
 $routes->get('login', 'Auth::index');
 $routes->post('login/proses', 'Auth::proses');
 $routes->get('logout', 'Auth::logout');
