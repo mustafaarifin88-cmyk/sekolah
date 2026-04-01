@@ -247,15 +247,19 @@ class Aplikasi extends BaseController
     {
         $guruModel = new GuruModel();
         $mapelModel = new MapelModel();
+        $kelasModel = new KelasModel();
         $db = \Config\Database::connect();
+        
         $builder = $db->table('set_mapel_guru');
-        $builder->select('set_mapel_guru.*, guru_tendik.nama_lengkap as nama_guru, mapel.nama_mapel');
+        $builder->select('set_mapel_guru.*, guru_tendik.nama_lengkap as nama_guru, mapel.nama_mapel, kelas.nama_kelas');
         $builder->join('guru_tendik', 'guru_tendik.id_guru = set_mapel_guru.id_guru', 'left');
         $builder->join('mapel', 'mapel.id_mapel = set_mapel_guru.id_mapel', 'left');
+        $builder->join('kelas', 'kelas.id_kelas = set_mapel_guru.id_kelas', 'left');
 
         $data['set_mapel'] = $builder->get()->getResultArray();
         $data['guru'] = $guruModel->findAll();
         $data['mapel'] = $mapelModel->findAll();
+        $data['kelas'] = $kelasModel->findAll();
         return view('admin/aplikasi/set_mapel', $data);
     }
 
@@ -264,10 +268,11 @@ class Aplikasi extends BaseController
         $model = new SetMapelGuruModel();
         $data = [
             'id_guru' => $this->request->getPost('id_guru'),
+            'id_kelas' => $this->request->getPost('id_kelas'),
             'id_mapel' => $this->request->getPost('id_mapel')
         ];
         $model->insert($data);
-        return redirect()->to(base_url('admin/aplikasi/set_mapel'))->with('success', 'Mata Pelajaran berhasil diset.');
+        return redirect()->to(base_url('admin/aplikasi/set_mapel'))->with('success', 'Tugas Mapel berhasil diset.');
     }
 
     public function update_set_mapel($id)
@@ -275,6 +280,7 @@ class Aplikasi extends BaseController
         $model = new SetMapelGuruModel();
         $data = [
             'id_guru' => $this->request->getPost('id_guru'),
+            'id_kelas' => $this->request->getPost('id_kelas'),
             'id_mapel' => $this->request->getPost('id_mapel')
         ];
         $model->update($id, $data);
