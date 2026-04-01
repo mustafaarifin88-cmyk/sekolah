@@ -50,7 +50,7 @@
             <div class="row align-items-center position-relative" style="z-index: 2;">
                 <div class="col-md-8">
                     <span class="badge bg-white text-success rounded-pill px-3 py-2 mb-3 shadow-sm fw-bold">PANEL GURU</span>
-                    <h1 class="fw-bolder greeting-text mb-2">Selamat Datang, <?= session()->get('username') ?>!</h1>
+                    <h1 class="fw-bolder greeting-text mb-2">Selamat Datang, <?= $nama_lengkap_guru ?>!</h1>
                     <p class="fs-5 opacity-75 mb-0">Mari mulai aktivitas akademik Anda hari ini dengan penuh semangat.</p>
                 </div>
             </div>
@@ -64,7 +64,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <p class="text-muted fw-bold text-uppercase fs-7 mb-1">Siswa Diajar</p>
-                    <h3 class="fw-black text-dark m-0">120</h3>
+                    <h3 class="fw-black text-dark m-0"><?= $total_siswa ?></h3>
                 </div>
                 <div class="icon-wrapper bg-primary bg-opacity-10 text-primary">
                     <i class="fas fa-users"></i>
@@ -77,7 +77,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <p class="text-muted fw-bold text-uppercase fs-7 mb-1">Kelas Diampu</p>
-                    <h3 class="fw-black text-dark m-0">4</h3>
+                    <h3 class="fw-black text-dark m-0"><?= $total_kelas ?></h3>
                 </div>
                 <div class="icon-wrapper bg-success bg-opacity-10 text-success">
                     <i class="fas fa-door-open"></i>
@@ -90,7 +90,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <p class="text-muted fw-bold text-uppercase fs-7 mb-1">Total Jam/Minggu</p>
-                    <h3 class="fw-black text-dark m-0">24</h3>
+                    <h3 class="fw-black text-dark m-0"><?= $total_jam ?></h3>
                 </div>
                 <div class="icon-wrapper bg-warning bg-opacity-10 text-warning">
                     <i class="fas fa-clock"></i>
@@ -103,7 +103,7 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <p class="text-muted fw-bold text-uppercase fs-7 mb-1">Berita Anda</p>
-                    <h3 class="fw-black text-dark m-0">12</h3>
+                    <h3 class="fw-black text-dark m-0"><?= $total_berita ?></h3>
                 </div>
                 <div class="icon-wrapper bg-danger bg-opacity-10 text-danger">
                     <i class="fas fa-newspaper"></i>
