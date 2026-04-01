@@ -1,1 +1,1 @@
-ALTER TABLE `siswa` MODIFY `id_kelas` int(11) NULL DEFAULT NULL;
+ALTER TABLE `siswa` ADD `jenis_kelamin` VARCHAR(15) NULL DEFAULT NULL AFTER `nama_siswa`;
