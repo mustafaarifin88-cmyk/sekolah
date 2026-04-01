@@ -8,25 +8,53 @@ use App\Models\RaporModel;
 
 class Akademik extends BaseController
 {
-    public function siswa_ajar()
+    public function jadwal()
     {
         $db = \Config\Database::connect();
         $id_guru = session()->get('id_relasi');
         
-        $kelas_diajar = $db->table('set_mapel_guru')->where('id_guru', $id_guru)->select('id_kelas')->distinct()->get()->getResultArray();
-        $kelas_ids = array_column($kelas_diajar, 'id_kelas');
+        $builder = $db->table('set_mapel_guru');
+        $builder->select('set_mapel_guru.*, kelas.nama_kelas, mapel.nama_mapel');
+        $builder->join('kelas', 'kelas.id_kelas = set_mapel_guru.id_kelas', 'left');
+        $builder->join('mapel', 'mapel.id_mapel = set_mapel_guru.id_mapel', 'left');
+        $builder->where('set_mapel_guru.id_guru', $id_guru);
+        $builder->orderBy('set_mapel_guru.hari', 'ASC');
         
-        if(!empty($kelas_ids)){
-            $builder = $db->table('siswa');
-            $builder->select('siswa.*, kelas.nama_kelas');
-            $builder->join('kelas', 'kelas.id_kelas = siswa.id_kelas', 'left');
-            $builder->whereIn('siswa.id_kelas', $kelas_ids);
-            $data['siswa'] = $builder->get()->getResultArray();
-        } else {
-            $data['siswa'] = [];
-        }
+        $data['jadwal'] = $builder->get()->getResultArray();
+        return view('guru/jadwal', $data);
+    }
+
+    public function data_kelas()
+    {
+        $db = \Config\Database::connect();
+        $id_guru = session()->get('id_relasi');
         
-        return view('guru/siswa_ajar', $data);
+        $builder = $db->table('set_mapel_guru');
+        $builder->select('kelas.id_kelas, kelas.nama_kelas');
+        $builder->join('kelas', 'kelas.id_kelas = set_mapel_guru.id_kelas', 'left');
+        $builder->where('set_mapel_guru.id_guru', $id_guru);
+        $builder->distinct();
+        
+        $data['kelas'] = $builder->get()->getResultArray();
+        return view('guru/data_kelas', $data);
+    }
+
+    public function data_siswa($id_kelas = null)
+    {
+        if (!$id_kelas) return redirect()->to(base_url('guru/akademik/data_kelas'));
+        
+        $db = \Config\Database::connect();
+        $kelas = $db->table('kelas')->where('id_kelas', $id_kelas)->get()->getRowArray();
+        
+        $builder = $db->table('siswa');
+        $builder->select('siswa.*, kelas.nama_kelas');
+        $builder->join('kelas', 'kelas.id_kelas = siswa.id_kelas', 'left');
+        $builder->where('siswa.id_kelas', $id_kelas);
+        
+        $data['siswa'] = $builder->get()->getResultArray();
+        $data['nama_kelas_aktif'] = $kelas ? $kelas['nama_kelas'] : 'Tidak Diketahui';
+        
+        return view('guru/data_siswa', $data);
     }
 
     public function input_nilai()
@@ -49,7 +77,6 @@ class Akademik extends BaseController
             $data['siswa'] = [];
         }
 
-        $model = new RaporModel();
         $data['tugas'] = $tugas_mengajar;
         
         $builder = $db->table('nilai_rapor');
