@@ -105,6 +105,7 @@ $routes->group('admin', static function ($routes) {
         $routes->post('update_siswa/(:num)', 'Admin\Akademik::update_siswa/$1');
         $routes->get('hapus_siswa/(:num)', 'Admin\Akademik::hapus_siswa/$1');
         $routes->post('import_siswa', 'Admin\Akademik::import_siswa');
+        $routes->post('naik_kelas', 'Admin\Akademik::naik_kelas'); // FITUR NAIK KELAS
         
         $routes->get('guru', 'Admin\Akademik::guru');
         $routes->post('simpan_guru', 'Admin\Akademik::simpan_guru');
