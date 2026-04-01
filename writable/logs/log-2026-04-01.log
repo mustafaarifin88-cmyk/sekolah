@@ -268,3 +268,27 @@ DEBUG - 2026-04-01 09:41:09 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2026-04-01 09:41:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2026-04-01 10:00:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2026-04-01 10:00:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2026-04-01 10:09:32 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "frontend/akademik/kurikulum.php"
+[Method: GET, Route: akademik/kurikulum]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(226): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('frontend/akademik/kurikulum.php')
+ 2 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('frontend/akademik/kurikulum', [], true)
+ 3 APPPATH\Controllers\Frontend.php(65): view('frontend/akademik/kurikulum', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->kurikulum()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 10:09:39 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "frontend/akademik/kelas.php"
+[Method: GET, Route: akademik/kelas]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(226): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('frontend/akademik/kelas.php')
+ 2 SYSTEMPATH\Common.php(1250): CodeIgniter\View\View->render('frontend/akademik/kelas', [], true)
+ 3 APPPATH\Controllers\Frontend.php(72): view('frontend/akademik/kelas', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->kelas()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
