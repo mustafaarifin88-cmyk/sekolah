@@ -40,7 +40,8 @@
                         <tr>
                             <th width="5%" class="text-center">No</th>
                             <th>Info Detail Siswa</th>
-                            <th class="text-center">ID Kelas</th>
+                            <th class="text-center">L/P</th>
+                            <th class="text-center">Kelas</th>
                             <th>Tanggal Masuk / Pendaftaran</th>
                         </tr>
                     </thead>
@@ -52,11 +53,14 @@
                                 <div class="fw-bold text-dark fs-6"><?= $row['nama_siswa'] ?></div>
                                 <span class="text-muted fs-7">NIS: <?= $row['nis'] ?> | NISN: <?= $row['nisn'] ?></span>
                             </td>
-                            <td class="text-center"><span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill border border-success border-opacity-25 fs-6"><?= $row['id_kelas'] ?? '-' ?></span></td>
+                            <td class="text-center">
+                                <span class="badge <?= $row['jenis_kelamin'] == 'Laki-Laki' ? 'bg-primary text-primary' : 'bg-danger text-danger' ?> bg-opacity-10 px-2 py-1 rounded-pill"><?= $row['jenis_kelamin'] == 'Laki-Laki' ? 'L' : 'P' ?></span>
+                            </td>
+                            <td class="text-center"><span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill border border-success border-opacity-25 fs-6"><?= $row['nama_kelas'] ?? '-' ?></span></td>
                             <td class="text-secondary"><i class="far fa-id-badge text-success me-1"></i> <?= $row['jenis_pendaftaran'] ?></td>
                         </tr>
                         <?php endforeach; else: ?>
-                        <tr id="emptyRow"><td colspan="4" class="text-center py-5 text-muted"><i class="fas fa-user-graduate fs-1 mb-3 opacity-50 d-block"></i>Belum ada data siswa terdaftar.</td></tr>
+                        <tr id="emptyRow"><td colspan="5" class="text-center py-5 text-muted"><i class="fas fa-user-graduate fs-1 mb-3 opacity-50 d-block"></i>Belum ada data siswa terdaftar.</td></tr>
                         <?php endif; ?>
                     </tbody>
                 </table>
