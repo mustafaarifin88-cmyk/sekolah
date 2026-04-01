@@ -12,7 +12,7 @@ class SetMapelGuruModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_guru', 'id_kelas', 'id_mapel'];
+    protected $allowedFields    = ['id_guru', 'id_kelas', 'id_mapel', 'hari', 'jam_mulai', 'jam_selesai'];
     protected $useTimestamps    = true;
     protected $dateFormat       = 'datetime';
     protected $createdField     = 'created_at';
