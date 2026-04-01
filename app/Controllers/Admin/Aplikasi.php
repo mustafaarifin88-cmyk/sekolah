@@ -255,6 +255,8 @@ class Aplikasi extends BaseController
         $builder->join('guru_tendik', 'guru_tendik.id_guru = set_mapel_guru.id_guru', 'left');
         $builder->join('mapel', 'mapel.id_mapel = set_mapel_guru.id_mapel', 'left');
         $builder->join('kelas', 'kelas.id_kelas = set_mapel_guru.id_kelas', 'left');
+        $builder->orderBy('kelas.nama_kelas', 'ASC');
+        $builder->orderBy('set_mapel_guru.hari', 'ASC');
 
         $data['set_mapel'] = $builder->get()->getResultArray();
         $data['guru'] = $guruModel->findAll();
@@ -267,31 +269,37 @@ class Aplikasi extends BaseController
     {
         $model = new SetMapelGuruModel();
         $data = [
-            'id_guru' => $this->request->getPost('id_guru'),
             'id_kelas' => $this->request->getPost('id_kelas'),
-            'id_mapel' => $this->request->getPost('id_mapel')
+            'id_mapel' => $this->request->getPost('id_mapel'),
+            'id_guru' => $this->request->getPost('id_guru'),
+            'hari' => $this->request->getPost('hari'),
+            'jam_mulai' => $this->request->getPost('jam_mulai'),
+            'jam_selesai' => $this->request->getPost('jam_selesai')
         ];
         $model->insert($data);
-        return redirect()->to(base_url('admin/aplikasi/set_mapel'))->with('success', 'Tugas Mapel berhasil diset.');
+        return redirect()->to(base_url('admin/aplikasi/set_mapel'))->with('success', 'Jadwal & Tugas Mapel berhasil diset.');
     }
 
     public function update_set_mapel($id)
     {
         $model = new SetMapelGuruModel();
         $data = [
-            'id_guru' => $this->request->getPost('id_guru'),
             'id_kelas' => $this->request->getPost('id_kelas'),
-            'id_mapel' => $this->request->getPost('id_mapel')
+            'id_mapel' => $this->request->getPost('id_mapel'),
+            'id_guru' => $this->request->getPost('id_guru'),
+            'hari' => $this->request->getPost('hari'),
+            'jam_mulai' => $this->request->getPost('jam_mulai'),
+            'jam_selesai' => $this->request->getPost('jam_selesai')
         ];
         $model->update($id, $data);
-        return redirect()->to(base_url('admin/aplikasi/set_mapel'))->with('success', 'Data Set Mata Pelajaran berhasil diperbarui.');
+        return redirect()->to(base_url('admin/aplikasi/set_mapel'))->with('success', 'Jadwal & Tugas Mapel berhasil diperbarui.');
     }
 
     public function hapus_set_mapel($id)
     {
         $model = new SetMapelGuruModel();
         $model->delete($id);
-        return redirect()->to(base_url('admin/aplikasi/set_mapel'))->with('success', 'Set Mata Pelajaran berhasil dihapus.');
+        return redirect()->to(base_url('admin/aplikasi/set_mapel'))->with('success', 'Jadwal & Tugas Mapel berhasil dihapus.');
     }
 
     public function slider()
