@@ -547,3 +547,173 @@ ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC', [], false)
  9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
 10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
 11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-04-01 10:15:02 --> Unknown column 'siswa.jenis_kelamin' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC', [], false)
+ 5 APPPATH\Controllers\Frontend.php(83): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->siswa()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 10:15:02 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'siswa.jenis_kelamin' in 'field list'
+[Method: GET, Route: akademik/siswa]
+in SYSTEMPATH\Database\BaseConnection.php on line 724.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC', [], false)
+ 2 APPPATH\Controllers\Frontend.php(83): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->siswa()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 10:15:02 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'siswa.jenis_kelamin' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC', [], false)
+ 4 APPPATH\Controllers\Frontend.php(83): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->siswa()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 10:15:02 --> [Caused by] mysqli_sql_exception: Unknown column 'siswa.jenis_kelamin' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC', [], false)
+ 5 APPPATH\Controllers\Frontend.php(83): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->siswa()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ERROR - 2026-04-01 10:15:11 --> Unknown column 'siswa.jenis_kelamin' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC', [], false)
+ 5 APPPATH\Controllers\Frontend.php(83): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->siswa()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 10:15:11 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'siswa.jenis_kelamin' in 'field list'
+[Method: GET, Route: akademik/siswa]
+in SYSTEMPATH\Database\BaseConnection.php on line 724.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC', [], false)
+ 2 APPPATH\Controllers\Frontend.php(83): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->siswa()
+ 4 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 5 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 10:15:11 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'siswa.jenis_kelamin' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC', [], false)
+ 4 APPPATH\Controllers\Frontend.php(83): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->siswa()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-04-01 10:15:11 --> [Caused by] mysqli_sql_exception: Unknown column 'siswa.jenis_kelamin' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `siswa`.`nama_siswa`, `siswa`.`nisn`, `siswa`.`jenis_kelamin`, `kelas`.`nama_kelas`
+FROM `siswa`
+LEFT JOIN `kelas` ON `kelas`.`id_kelas` = `siswa`.`id_kelas`
+ORDER BY `kelas`.`nama_kelas` ASC, `siswa`.`nama_siswa` ASC', [], false)
+ 5 APPPATH\Controllers\Frontend.php(83): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Frontend->siswa()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Frontend))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
