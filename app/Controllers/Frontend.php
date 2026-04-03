@@ -90,8 +90,13 @@ class Frontend extends BaseController
 
     public function guru()
     {
-        $model = new GuruModel();
-        $data['guru'] = $model->orderBy('nama_lengkap', 'ASC')->findAll();
+        $db = \Config\Database::connect();
+        $builder = $db->table('guru_tendik');
+        $builder->select('guru_tendik.*, users.foto');
+        $builder->join('users', 'users.id_relasi = guru_tendik.id_guru AND users.role != "siswa"', 'left');
+        $builder->orderBy('guru_tendik.nama_lengkap', 'ASC');
+        $data['guru'] = $builder->get()->getResultArray();
+        
         return view('frontend/akademik/guru', $data);
     }
 

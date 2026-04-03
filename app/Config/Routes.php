@@ -39,6 +39,9 @@ $routes->get('logout', 'Auth::logout');
 
 $routes->group('admin', static function ($routes) {
     $routes->get('dashboard', 'Admin\Dashboard::index');
+    
+    $routes->get('profil', 'Admin\Aplikasi::profil');
+    $routes->post('update_profil', 'Admin\Aplikasi::update_profil');
 
     $routes->group('aplikasi', static function ($routes) {
         $routes->get('identitas', 'Admin\Aplikasi::identitas');
@@ -65,6 +68,7 @@ $routes->group('admin', static function ($routes) {
         $routes->post('simpan_slider', 'Admin\Aplikasi::simpan_slider');
         $routes->post('update_slider/(:num)', 'Admin\Aplikasi::update_slider/$1');
         $routes->get('hapus_slider/(:num)', 'Admin\Aplikasi::hapus_slider/$1');
+        
         $routes->get('profil', 'Admin\Aplikasi::profil');
         $routes->post('update_profil', 'Admin\Aplikasi::update_profil');
     });
@@ -74,6 +78,7 @@ $routes->group('admin', static function ($routes) {
         $routes->post('simpan_kategori_berita', 'Admin\Informasi::simpan_kategori_berita');
         $routes->post('update_kategori_berita/(:num)', 'Admin\Informasi::update_kategori_berita/$1');
         $routes->get('hapus_kategori_berita/(:num)', 'Admin\Informasi::hapus_kategori_berita/$1');
+        
         $routes->get('berita', 'Admin\Informasi::berita');
         $routes->post('simpan_berita', 'Admin\Informasi::simpan_berita');
         $routes->post('update_berita/(:num)', 'Admin\Informasi::update_berita/$1');
@@ -83,6 +88,7 @@ $routes->group('admin', static function ($routes) {
         $routes->post('simpan_kategori_pengumuman', 'Admin\Informasi::simpan_kategori_pengumuman');
         $routes->post('update_kategori_pengumuman/(:num)', 'Admin\Informasi::update_kategori_pengumuman/$1');
         $routes->get('hapus_kategori_pengumuman/(:num)', 'Admin\Informasi::hapus_kategori_pengumuman/$1');
+        
         $routes->get('pengumuman', 'Admin\Informasi::pengumuman');
         $routes->post('simpan_pengumuman', 'Admin\Informasi::simpan_pengumuman');
         $routes->post('update_pengumuman/(:num)', 'Admin\Informasi::update_pengumuman/$1');
@@ -105,7 +111,7 @@ $routes->group('admin', static function ($routes) {
         $routes->post('update_siswa/(:num)', 'Admin\Akademik::update_siswa/$1');
         $routes->get('hapus_siswa/(:num)', 'Admin\Akademik::hapus_siswa/$1');
         $routes->post('import_siswa', 'Admin\Akademik::import_siswa');
-        $routes->post('naik_kelas', 'Admin\Akademik::naik_kelas'); // FITUR NAIK KELAS
+        $routes->post('naik_kelas', 'Admin\Akademik::naik_kelas');
         
         $routes->get('guru', 'Admin\Akademik::guru');
         $routes->post('simpan_guru', 'Admin\Akademik::simpan_guru');

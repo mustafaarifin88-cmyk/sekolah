@@ -18,9 +18,18 @@
     <div class="row g-4">
         <?php if(isset($guru) && count($guru) > 0): ?>
             <?php foreach($guru as $g): ?>
+            <?php 
+                $foto = base_url('assets/dist/img/avatar4.png');
+                if (isset($g['jenis_kelamin']) && $g['jenis_kelamin'] == 'Perempuan') {
+                    $foto = base_url('assets/dist/img/avatar3.png');
+                }
+                if (!empty($g['foto']) && $g['foto'] != 'default.png') {
+                    $foto = base_url('uploads/profil/' . $g['foto']);
+                }
+            ?>
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="teacher-card">
-                    <img src="<?= base_url('assets/dist/img/avatar4.png') ?>" alt="Teacher" class="teacher-img">
+                    <img src="<?= $foto ?>" alt="Teacher" class="teacher-img">
                     <h6 class="fw-bolder text-dark mb-1"><?= $g['gelar_depan'] ?> <?= $g['nama_lengkap'] ?> <?= $g['gelar_belakang'] ?></h6>
                     <p class="text-muted fs-7 mb-3"><?= $g['status_pegawai'] ?></p>
                     <span class="badge bg-danger bg-opacity-10 text-danger border border-danger border-opacity-25 rounded-pill px-3 py-1">Pendidik</span>
